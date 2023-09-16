@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get } from "firebase/database";
+import { getDatabase, onValue, ref, get } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -15,7 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const KEY = process.env.ENCRYPT_KEY?.toString() as string;
-const nodeName = "cards";
+const nodeName = "users";
 
 function customEncrypt(inputString : string , key : string) {
     const characters = process.env.CHARS?.toString() as string;
@@ -52,53 +52,35 @@ function customDecrypt(encryptedString : string, key : string) {
     }
     return decryptedString;
 }
-  
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
-    const cardParam = query.cardID?.toString() as string;
-    console.log(cardParam)
-    const cardID = customDecrypt(cardParam, KEY).toString();
-
+    const tagId = customDecrypt(query.tagId?.toString() as string, KEY).toString() as string;
+    
     const nodeRef = ref(database, nodeName);
 
     try {
         const snapshot = await get(nodeRef);
         const nodeData = snapshot.val();
 
-        if (nodeData) { // not empty
+        if (nodeData) {
             let foundUser = false;
 
             for (const nodeId of Object.keys(nodeData)) {
                 const node = nodeData[nodeId];
-                // console.log(nodeId)
-                // console.log(cardID)
-                // console.log(nodeId.length)
-                // console.log(cardID.length)
 
-
-                if (nodeId === cardID) {
-                    // console.log(node.tagId);
-                    if (node && node.tagId !== "none") {
-                        sendRedirect(event, `/profile/${customEncrypt(node.tagId, KEY)}`);
-                        break;
-
-                    } else{
-                        sendRedirect(event, "/verification");
-                        break;
-                    }
-
+                if (node && node.nfcID === tagId) {
+                    foundUser = true;
+                    return {"message" : 'User Found', "data" : node};
                 }
             }
-
             if (!foundUser) {
-                return "Error: User Does not exist";
+                return { "message" : "User Not found"}
             }
-        } else {
-            return "Error: Node Does not Exist";
         }
-    } catch (error) {
-        return "Error: Something went wrong";
     }
-});
+    catch (error) {
+        return "Error: Something went wrong."
+    }
 
+})
