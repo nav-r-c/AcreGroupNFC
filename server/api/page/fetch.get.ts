@@ -34,27 +34,9 @@ function customEncrypt(inputString : string , key : string) {
     }
     return encryptedString;
   }
-  
-//   function customDecrypt(encryptedString : string, key : string) {
-//     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:,.<>?';
-//     let decryptedString = '';
-//     for (let i = 0; i < encryptedString.length; i++) {
-//       const char = encryptedString.charAt(i);
-//       const charIndex = characters.indexOf(char);
-//       if (charIndex !== -1) { // Check if the character is in characters
-//         const keyChar = key.charCodeAt(i % key.length) % characters.length;
-//         const decryptedChar = (charIndex - keyChar + characters.length) % characters.length;
-//         decryptedString += characters.charAt(decryptedChar);
-//       } else {
-//         // Handle characters not in characters string, you can skip or handle them as needed
-//         decryptedString += char;
-//       }
-//     }
-//     return decryptedString;
-//   }
 
 function customDecrypt(encryptedString : string, key : string) {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:,.<>?';
+    const characters = process.env.CHARS?.toString() as string;
     let decryptedString = '';
     for (let i = 0; i < encryptedString.length; i++) {
       const char = encryptedString.charAt(i);
@@ -96,7 +78,7 @@ export default defineEventHandler(async (event) => {
 
 
                 if (nodeId === cardID) {
-                    console.log(node.tagID);
+                    // console.log(node.tagID);
 
                     if (node && node.tagId !== "none") {
                         foundUser = true;
