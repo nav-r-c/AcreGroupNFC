@@ -99,15 +99,16 @@ export default defineEventHandler(async (event) => {
                     console.log(node.tagID);
 
                     if (node && node.tagId !== "none") {
+                        foundUser = true;
                         sendRedirect(event, `/profile/${customEncrypt(node.tagId, KEY)}`);
                         break;
 
                     } else{
+                        foundUser = true;
                         sendRedirect(event, "/verification");
                         break;
                     }
 
-                    foundUser = true;
                 }
             }
 
