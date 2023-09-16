@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, onValue, ref, get } from "firebase/database";
+import { getDatabase, ref, get } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -18,7 +18,7 @@ const KEY = process.env.ENCRYPT_KEY?.toString() as string;
 const nodeName = "cards";
 
 function customEncrypt(inputString : string , key : string) {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:,.<>?';
+    const characters = process.env.CHARS?.toString() as string;
     let encryptedString = '';
     for (let i = 0; i < inputString.length; i++) {
       const char = inputString.charAt(i);
@@ -78,15 +78,12 @@ export default defineEventHandler(async (event) => {
 
 
                 if (nodeId === cardID) {
-                    // console.log(node.tagID);
-
+                    // console.log(node.tagId);
                     if (node && node.tagId !== "none") {
-                        foundUser = true;
                         sendRedirect(event, `/profile/${customEncrypt(node.tagId, KEY)}`);
                         break;
 
                     } else{
-                        foundUser = true;
                         sendRedirect(event, "/verification");
                         break;
                     }
