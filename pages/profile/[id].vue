@@ -2,7 +2,10 @@
     <div>
         <h1>Profile Page</h1>
         <div v-if="userExists">
-            <h1>User Exists</h1>
+            <p>Name: {{ (userDetails.data.value?.data as UserDetails)?.name }}</p>
+            <p>Phone Number: {{ (userDetails.data.value?.data as UserDetails)?.phoneNumber }}</p>
+            <p>DOB: {{ (userDetails.data.value?.data as UserDetails)?.dob }}</p>
+            <p>E-Mail: {{ (userDetails.data.value?.data as UserDetails)?.email }}</p>
         </div>
         <div v-else>
             <h1>User Does not exist</h1>
@@ -26,6 +29,16 @@
             phoneNumber? : string,
             verified? : boolean
         } | string
+    }
+
+    interface UserDetails {
+        dob? : string,
+        email? : string,
+        membershipStatus? : string,
+        name? : string,
+        nfcID? : string,
+        phoneNumber? : string,
+        verified? : boolean
     }
 
     const userExists = computed(() => {
