@@ -99,7 +99,7 @@ export default defineEventHandler(async (event) => {
                     console.log(node.tagID);
 
                     if (node && node.tagId !== "none") {
-                        sendRedirect(event, `/profile/${customEncrypt(nodeId, KEY)}`);
+                        sendRedirect(event, `/profile/${customEncrypt(node.tagId, KEY)}`);
                         break;
 
                     } else{
