@@ -1,3 +1,3 @@
 <template>
-    <div>Hello World</div>
+    <div>Acre Group NFC App Homepage</div>
 </template>
