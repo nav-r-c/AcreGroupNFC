@@ -15,36 +15,68 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const KEY = process.env.ENCRYPT_KEY?.toString() as string;
-const nodeName = "users";
+const nodeName = "cards";
 
-function customEncrypt(inputString : string, key : string) {
-    const characters = process.env.CHARS?.toString() as string;
+function customEncrypt(inputString : string , key : string) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:,.<>?';
     let encryptedString = '';
-    for (let i = 0; i < 12; i++) {
-        const charIndex = i < inputString.length ? inputString.charCodeAt(i) % characters.length : 0;
+    for (let i = 0; i < inputString.length; i++) {
+      const char = inputString.charAt(i);
+      const charIndex = characters.indexOf(char);
+      if (charIndex !== -1) { // Check if the character is in characters
         const keyChar = key.charCodeAt(i % key.length) % characters.length;
         const encryptedChar = (charIndex + keyChar) % characters.length;
         encryptedString += characters.charAt(encryptedChar);
+      } else {
+        // Handle characters not in characters string, you can skip or handle them as needed
+        encryptedString += char;
+      }
     }
     return encryptedString;
-}
+  }
+  
+//   function customDecrypt(encryptedString : string, key : string) {
+//     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:,.<>?';
+//     let decryptedString = '';
+//     for (let i = 0; i < encryptedString.length; i++) {
+//       const char = encryptedString.charAt(i);
+//       const charIndex = characters.indexOf(char);
+//       if (charIndex !== -1) { // Check if the character is in characters
+//         const keyChar = key.charCodeAt(i % key.length) % characters.length;
+//         const decryptedChar = (charIndex - keyChar + characters.length) % characters.length;
+//         decryptedString += characters.charAt(decryptedChar);
+//       } else {
+//         // Handle characters not in characters string, you can skip or handle them as needed
+//         decryptedString += char;
+//       }
+//     }
+//     return decryptedString;
+//   }
 
 function customDecrypt(encryptedString : string, key : string) {
-    const characters = process.env.CHARS?.toString() as string;
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:,.<>?';
     let decryptedString = '';
-    for (let i = 0; i < 12; i++) {
-        const charIndex = characters.indexOf(encryptedString.charAt(i));
+    for (let i = 0; i < encryptedString.length; i++) {
+      const char = encryptedString.charAt(i);
+      const charIndex = characters.indexOf(char);
+      if (charIndex !== -1) { // Check if the character is in characters
         const keyChar = key.charCodeAt(i % key.length) % characters.length;
         const decryptedChar = (charIndex - keyChar + characters.length) % characters.length;
-        decryptedString += String.fromCharCode(decryptedChar);
+        decryptedString += characters.charAt(decryptedChar);
+      } else {
+        // Handle characters not in characters string, you can skip or handle them as needed
+        decryptedString += char;
+      }
     }
     return decryptedString;
 }
+  
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
-    const nfcParam = query.nfcID?.toString() as string;
-    const nfcID = customDecrypt(nfcParam, KEY).toString().trim().slice(0, 6);
+    const cardParam = query.cardID?.toString() as string;
+    console.log(cardParam)
+    const cardID = customDecrypt(cardParam, KEY).toString();
 
     const nodeRef = ref(database, nodeName);
 
@@ -57,17 +89,20 @@ export default defineEventHandler(async (event) => {
 
             for (const nodeId of Object.keys(nodeData)) {
                 const node = nodeData[nodeId];
-                console.log(node.nfcID)
-                console.log(nfcID)
+                // console.log(nodeId)
+                // console.log(cardID)
+                // console.log(nodeId.length)
+                // console.log(cardID.length)
 
-                if (node.nfcID === nfcID) {
-                    console.log(node.verified);
 
-                    if (node.verified === true) {
+                if (nodeId === cardID) {
+                    console.log(node.tagID);
+
+                    if (node && node.tagId !== "none") {
                         sendRedirect(event, `/profile/${customEncrypt(nodeId, KEY)}`);
                         break;
 
-                    } else if (node.verified === false) {
+                    } else{
                         sendRedirect(event, "/verification");
                         break;
                     }
