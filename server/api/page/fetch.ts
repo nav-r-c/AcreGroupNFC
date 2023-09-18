@@ -80,11 +80,11 @@ export default defineEventHandler(async (event) => {
                 if (nodeId === cardID) {
                     // console.log(node.tagId);
                     if (node && node.tagId !== "none") {
-                        sendRedirect(event, `/profile/${customEncrypt(node.tagId, KEY)}`);
+                        sendRedirect(event, `/profile/${customEncrypt(node.tagId, KEY)}&${customEncrypt(cardID, KEY)}`);
                         break;
 
                     } else{
-                        sendRedirect(event, `/verification/${customEncrypt(node.tagId, KEY)}`);
+                        sendRedirect(event, `/verification/${customEncrypt(cardID, KEY)}`);
                         break;
                     }
 

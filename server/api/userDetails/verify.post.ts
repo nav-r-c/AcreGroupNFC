@@ -56,7 +56,6 @@ const nodeName = "cards"
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
-    const tagId = customDecrypt(query.tagId?.toString() as string, KEY).toString() as string;
     const cardID = customDecrypt(query.cardID?.toString() as string, KEY).toString() as string;
 	const phoneNumber = query.phoneNumber?.toString() as string;
 	const verifCode = query.verifCode?.toString() as string;
@@ -64,7 +63,7 @@ export default defineEventHandler(async (event) => {
 	const currentDomain = event.req.headers.host
     const nodeRef = ref(database, nodeName)
 
-	const resp = await axios.get(`http://${currentDomain}/api/userDetails/verify?tagId=${customEncrypt(tagId, KEY)}&phoneNumber=${phoneNumber}&verifCode=${verifCode}`)
+	const resp = await axios.get(`http://${currentDomain}/api/userDetails/verify?phoneNumber=${phoneNumber}&verifCode=${verifCode}&cardID=${cardID}`)
 
     if (resp.data.message === "User Verified") {
         try {
@@ -72,7 +71,7 @@ export default defineEventHandler(async (event) => {
             const nodeData = snapshot.val()
 
             if (nodeData) {
-                const foundNodeKey = Object.keys(nodeData).find((nodeId) => {console.log(nodeId); console.log(cardID); return nodeId === cardID})
+                const foundNodeKey = Object.keys(nodeData).find((nodeId) => {return nodeId === cardID})
 
                 if (foundNodeKey) {
                     const cardRef = ref(database, `${nodeName}/${foundNodeKey}`)
@@ -81,7 +80,7 @@ export default defineEventHandler(async (event) => {
                         tagId : verifCode
                     })
 
-                    return {"message" : "User Verified and Tag Set"}
+                    return {"message" : "User Verified and Tag Set", "data" : {"tagId": customEncrypt(resp.data.data.nfcID, KEY)}}
                 }
                 else {
                     return {"message" : "Card Not Found"}
@@ -92,6 +91,10 @@ export default defineEventHandler(async (event) => {
         catch (error) {
             console.log(`Error: ${error} `)
         }
+    }
+    else {
+        // console.log(resp.data.data)
+        return {"message" : "User Not Verified"}
     }
 
     

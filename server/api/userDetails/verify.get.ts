@@ -54,21 +54,21 @@ function customDecrypt(encryptedString : string, key : string) {
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
-    const tagId = customDecrypt(query.tagId?.toString() as string, KEY).toString() as string;
+	const cardID = query.cardID?.toString() as string;
 	const phoneNumber = query.phoneNumber?.toString() as string;
 	const verifCode = query.verifCode?.toString() as string;
 
 	// console.log(tagId)
 	const currentDomain = event.req.headers.host
 	
-	const resp = await axios.get(`http://${currentDomain}/api/userDetails/fetch?tagId=${customEncrypt(tagId, KEY)}`)
+	const resp = await axios.get(`http://${currentDomain}/api/userDetails/fetch?tagId=${customEncrypt(verifCode, KEY)}`)
 
 	if (resp.data.message == "User Found") {
 		if ((resp.data.data['phoneNumber'] === phoneNumber) && (resp.data.data['nfcID'] == verifCode)) {
-			return {"message" : "User Verified"}
+			return {"message" : "User Verified", "data" : resp.data.data}
 		}
 		else {
-			return {"message" : "User Not Verified"}
+			return {"message" : "User Not Verified", "data" : resp.data.data}
 		}
 	}
 	else {
