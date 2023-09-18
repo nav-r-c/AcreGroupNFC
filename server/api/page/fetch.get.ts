@@ -84,7 +84,7 @@ export default defineEventHandler(async (event) => {
                         break;
 
                     } else{
-                        sendRedirect(event, "/verification");
+                        sendRedirect(event, `/verification/${customEncrypt(node.tagId, KEY)}`);
                         break;
                     }
 
