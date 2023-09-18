@@ -57,7 +57,7 @@ function customDecrypt(encryptedString : string, key : string) {
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
     const cardParam = query.cardID?.toString() as string;
-    console.log(cardParam)
+    // console.log(cardParam)
     const cardID = customDecrypt(cardParam, KEY).toString();
 
     const nodeRef = ref(database, nodeName);
