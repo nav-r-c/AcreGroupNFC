@@ -18,4 +18,7 @@
 <script setup lang="ts">
     const phoneNumber = ref();
     const verifCode = ref("");
+
+    
+
 </script>
