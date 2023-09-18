@@ -57,7 +57,7 @@ function customDecrypt(encryptedString : string, key : string) {
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
     const cardParam = query.cardID?.toString() as string;
-    console.log(cardParam)
+    // console.log(cardParam)
     const cardID = customDecrypt(cardParam, KEY).toString();
 
     const nodeRef = ref(database, nodeName);
@@ -80,11 +80,11 @@ export default defineEventHandler(async (event) => {
                 if (nodeId === cardID) {
                     // console.log(node.tagId);
                     if (node && node.tagId !== "none") {
-                        sendRedirect(event, `/profile/${customEncrypt(node.tagId, KEY)}`);
+                        sendRedirect(event, `/profile/${customEncrypt(node.tagId, KEY)}&${customEncrypt(cardID, KEY)}`);
                         break;
 
                     } else{
-                        sendRedirect(event, "/verification");
+                        sendRedirect(event, `/verification/${customEncrypt(cardID, KEY)}`);
                         break;
                     }
 
