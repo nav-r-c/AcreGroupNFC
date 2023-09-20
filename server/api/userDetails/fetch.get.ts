@@ -69,6 +69,9 @@ export default defineEventHandler(async (event) => {
             for (const nodeId of Object.keys(nodeData)) {
                 const node = nodeData[nodeId];
 
+                // console.log(node.nfcID)
+                // console.log(tagId)
+
                 if (node && node.nfcID === tagId) {
                     foundUser = true;
                     return {"message" : 'User Found', "data" : node};

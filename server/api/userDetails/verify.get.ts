@@ -54,9 +54,9 @@ function customDecrypt(encryptedString : string, key : string) {
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
-	const cardID = query.cardID?.toString() as string;
-	const phoneNumber = query.phoneNumber?.toString() as string;
-	const verifCode = query.verifCode?.toString() as string;
+    const cardID = query.cardID?.toString() as string;
+    const phoneNumber = query.phoneNumber?.toString() as string;
+    const verifCode = query.verifCode?.toString() as string;
 
 	// console.log(tagId)
 	const currentDomain = event.req.headers.host
