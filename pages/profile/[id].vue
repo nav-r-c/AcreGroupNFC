@@ -37,7 +37,9 @@
                     
                 </div>
             </DropCard>
+        </div>
 
+        <div class = "mt-[120px]">
             <DropCard cardTitle = "Aadhar Information">
                 <img :src = "(userDetails.data.value?.data as UserDetails).aadhar" class = "rounded-lg border-2 border-grey" />
             </DropCard>
