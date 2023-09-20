@@ -3,26 +3,31 @@
         <img src = "/logo-whitebg.png" class = "absolute z-10 mx-auto left-0 right-0 my-5" />
     </div>
     <div class = "mx-auto left-0 right-0 text-center font-[Roboto] absolute top-[25%] z-10">
-        <h1 class = "font-bold text-3xl my-5 text-white drop-shadow-xl drop-shadow-white">Profile Verification</h1>
-            <form class = "flex flex-col mx-auto text-left">
-                <div class = "bg-[#0A5D00] flex flex-col text-white w-[400px] mx-auto rounded-lg px-5 py-10 shadow-lg">
-                    <label for = "phone-number" class = "mb-1 font-bold">Phone Number: </label>
-                    <input class = "border-2 rounded-md p-1 outline-none text-black mb-5" id = "phone-number" placeholder="e.g. 95129226200" v-model="phoneNumber" required />
+        <h1 class = "font-bold text-4xl my-5 text-white drop-shadow-xl">Profile Verification</h1>
 
-                    <label for = "verif-code" class = "mb-1 font-bold">Verification Code: </label>
-                    <input class = "border-2 rounded-md p-1 outline-none text-black mb-5" id = "verif-code" placeholder = "e.g. ABC123" v-model="verifCode" required/>
-                </div>
-                <button type = "submit" class = "border-2 text-center mx-auto my-10 py-2 px-10 rounded-md text-white transition all ease-in-out hover:bg-white hover:text-[#3d3d3d]" @click.prevent="handleSubmit">Submit</button>
-            </form>
+        <form class = "flex flex-col mx-auto text-left">
+            <div class = "bg-[#0A5D00] flex flex-col text-white w-[400px] mx-auto rounded-lg px-5 py-10 shadow-lg">
+                <label for = "phone-number" class = "mb-1 font-bold">Phone Number: </label>
+                <input class = "border-2 rounded-md p-1 outline-none text-black mb-5" id = "phone-number" placeholder="e.g. 95129226200" v-model="phoneNumber" required />
+
+                <label for = "verif-code" class = "mb-1 font-bold">Verification Code: </label>
+                <input class = "border-2 rounded-md p-1 outline-none text-black mb-5" id = "verif-code" placeholder = "e.g. ABC123" v-model="verifCode" required/>
+            </div>
+            <button type = "submit" class = "border-2 text-center mx-auto my-10 py-2 px-10 rounded-md text-white transition all ease-in-out hover:bg-white hover:text-[#3d3d3d]" @click.prevent="handleSubmit">Submit</button>
+        </form>
     </div>
-    <!-- <div>
-        <img src = "~/public/kodai.png"  class = "-my-10 overflow-auto absolute z-0 w-[1920px]" />
-    </div> -->
+
+    <div class = "text-white underline text-center absolute mx-auto left-0 right-0 text-xl bottom-0 my-5">
+        <NuxtLink to="/">Terms And Services</NuxtLink>
+    </div>
+    <div>
+        <img src = "/kodai.png" class ="h-screen w-screen">
+    </div>
 </template>
 
 <script setup lang="ts">
-    const phoneNumber = ref();
-    const verifCode = ref();
+    const phoneNumber = ref("");
+    const verifCode = ref("");
 
     const route = useRoute()
     const router = useRouter();
@@ -67,12 +72,3 @@
     }
 
 </script>
-
-<style>
-    body {
-        background-image: url("/kodai.png");
-        background-repeat: no-repeat;
-        background-size: auto 100vh;
-        background-position: center top;
-    }
-</style>
