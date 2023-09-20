@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1>Profile Page</h1>
+    <div class = "mx-auto text-center font-[Roboto]">
+        <h1 class="font-bold">Profile Page</h1>
         <div v-if="userExists">
             <p>Name: {{ (userDetails.data.value?.data as UserDetails)?.name }}</p>
             <p>Phone Number: {{ (userDetails.data.value?.data as UserDetails)?.phoneNumber }}</p>
