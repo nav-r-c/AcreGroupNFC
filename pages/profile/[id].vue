@@ -34,12 +34,12 @@
                 <hr class = "border-[#A3A1A1]" />
                 <div class = "flex justify-between items-center mt-2">
                     <h1 class = "font-bold text-xl">Download Certicate </h1>
-                    
+                    <span class="material-symbols-outlined">download</span>
                 </div>
             </DropCard>
         </div>
 
-        <div class = "mt-[120px]">
+        <div class = "mt-[120px] mb-[100px]">
             <DropCard cardTitle = "Aadhar Information">
                 <img :src = "(userDetails.data.value?.data as UserDetails).aadhar" class = "rounded-lg border-2 border-grey" />
             </DropCard>
