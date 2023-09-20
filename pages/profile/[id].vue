@@ -34,7 +34,7 @@
                 <hr class = "border-[#A3A1A1]" />
                 <div class = "flex justify-between items-center mt-2">
                     <h1 class = "font-bold text-xl">Download Certicate </h1>
-                    <span class="material-symbols-outlined">download</span>
+                    <a :href = "(userDetails.data.value?.data as UserDetails).certificate" download target = "_blank"><span class="material-symbols-outlined">download</span></a>
                 </div>
             </DropCard>
         </div>
@@ -70,7 +70,8 @@
             image? : string,
             validDate? : string,
             verified? : boolean,
-            aadhar? : string
+            aadhar? : string,
+            certificate? : string
         } | string
     }
 
@@ -84,7 +85,8 @@
         image? : string,
         validDate? : string,
         verified? : boolean,
-        aadhar? : string
+        aadhar? : string,
+        certificate? : string
     }
 
     const userExists = computed(() => {
