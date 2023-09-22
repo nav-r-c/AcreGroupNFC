@@ -84,7 +84,7 @@ export default defineEventHandler(async (event) => {
                 if (nodeId === cardID) {
                     // console.log(node.tagId);
                     if (node && node.tagId !== "none") {
-                        sendRedirect(event, `/profile/${customEncrypt(node.tagId, KEY)}&${customEncrypt(cardID, KEY)}`);
+                        sendRedirect(event, `/profile/${customEncrypt(node.tagId, KEY)}~${customEncrypt(cardID, KEY)}`);
                         break;
 
                     } else{

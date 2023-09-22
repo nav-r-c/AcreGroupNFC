@@ -42,7 +42,7 @@
                     <hr class = "border-[#A3A1A1]" />
                     <div class = "flex justify-between items-center mt-2">
                         <h1 class = "font-bold text-md md:text-xl">Download Certicate </h1>
-                        <a :href = "(userDetails.data.value?.data as UserDetails).certificateUrl"><span class="material-symbols-outlined">download</span></a>
+                        <a :href = "(userDetails.data.value?.data as UserDetails).certificateUrl" download = "certificate.pdf"><span class="material-symbols-outlined">download</span></a>
                     </div>
                 </DropCard>
             </div>
@@ -64,9 +64,10 @@
 
     const route = useRoute();
     const id = ref(route.params.id);
+    
     provide('profileId', id.value);
 
-    const userDetails = await useFetch<UserDetailsResponse>(`/api/userDetails/fetch?tagId=${id.value}`)
+    const userDetails = await useFetch<UserDetailsResponse>(`/api/userDetails/fetch?tagId=${(id.value.toString() as string).split("_")[0]}`)
 
     interface UserDetailsResponse {
         message : string,

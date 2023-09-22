@@ -10,7 +10,7 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  devtools: { enabled: false },
+  devtools: { enabled: true },
   app: {
     head : {
       link : [
