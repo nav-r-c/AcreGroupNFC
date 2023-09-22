@@ -1,8 +1,9 @@
 <template>
     <div v-if="userExists">
+        <NuxtLayout name = "main-pages">
         <div class = "mx-auto text-center font-[Roboto] text-white">
             <div class = "bg-[#0A5D00] rounded-b-3xl mx-auto w-screen pt-5 pb-10">
-                <img src ="~/public/logo.png" class = "mx-auto w-[50px]" alt = "acre group logo" />
+                <img src ="/logo.png" class = "mx-auto w-[50px]" alt = "acre group logo" />
 
                 <h1 class="font-bold text-white text-3xl md:text-4xl drop-shadow-lg drop-shadow-white my-5">Personal Profile</h1>
                 <div class = "bg-[#1E2968] py-4 my-5 circle-mask">
@@ -20,7 +21,7 @@
             </div>
         </div>
 
-        <div class = "-my-5 grid grid-cols-1 gap-10">
+        <div class = "-my-5 mb-20 grid grid-cols-1 gap-10">
             <div>
                 <DropCard cardTitle = "Personal Information">
                     <div class = "py-2">
@@ -41,7 +42,7 @@
                     <hr class = "border-[#A3A1A1]" />
                     <div class = "flex justify-between items-center mt-2">
                         <h1 class = "font-bold text-md md:text-xl">Download Certicate </h1>
-                        <a :href = "(userDetails.data.value?.data as UserDetails).certificate" download target = "_blank"><span class="material-symbols-outlined">download</span></a>
+                        <a :href = "(userDetails.data.value?.data as UserDetails).certificate"><span class="material-symbols-outlined">download</span></a>
                     </div>
                 </DropCard>
             </div>
@@ -51,8 +52,7 @@
                 </DropCard>
             </div>
         </div>
-
-
+        </NuxtLayout>
     </div>
 
     <div v-else>
