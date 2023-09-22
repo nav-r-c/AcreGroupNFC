@@ -60,6 +60,8 @@ export default defineEventHandler(async (event) => {
 	const phoneNumber = query.phoneNumber?.toString() as string;
 	const verifCode = query.verifCode?.toString() as string;
 
+    // console.log('Card', cardID)
+
 	const currentDomain = event.req.headers.host
     const nodeRef = ref(database, nodeName)
 
@@ -75,6 +77,8 @@ export default defineEventHandler(async (event) => {
 
                 if (foundNodeKey) {
                     const cardRef = ref(database, `${nodeName}/${foundNodeKey}`)
+
+                    // console.log(cardRef)
 
                     await set(cardRef, {
                         tagId : verifCode

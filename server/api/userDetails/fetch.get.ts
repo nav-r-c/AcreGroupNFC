@@ -83,7 +83,7 @@ export default defineEventHandler(async (event) => {
         }
     }
     catch (error) {
-        return "Error: Something went wrong."
+        return `Error: Something went wrong: ${error}`
     }
 
 })
