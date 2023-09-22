@@ -64,25 +64,17 @@
 
     const route = useRoute();
     const id = ref(route.params.id);
-    
-    provide('profileId', id.value);
+
+    const nuxtApp = useNuxtApp();
+    if (!nuxtApp.$profileId) {
+        nuxtApp.provide('profileId', id.value);
+    }
 
     const userDetails = await useFetch<UserDetailsResponse>(`/api/userDetails/fetch?tagId=${(id.value.toString() as string).split("_")[0]}`)
 
     interface UserDetailsResponse {
         message : string,
-        data : {
-            Email? : string,
-            MembershipStatus? : string,
-            Name? : string,
-            NFCID? : string,
-            Phone? : string,
-            DpUrl? : string,
-            validityStartDate? : string,
-            proofUrl? : string,
-            certificateUrl? : string,
-            DOB? : string
-        } | string
+        data : UserDetails
     }
 
     interface UserDetails {

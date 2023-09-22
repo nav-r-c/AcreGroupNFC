@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
 import { get, getDatabase, ref } from "firebase/database";
-import customDecrypt from "~/composables/customDecrypt";
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -15,40 +14,27 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-const KEY = process.env.ENCRYPT_KEY?.toString() as string;
-const nodeName = "UserData";
+const nodeName = "Accommodations";
 
 export default defineEventHandler(async (event) => {
-    const query = getQuery(event);
-    const tagId = customDecrypt(query.tagId?.toString() as string, KEY).toString() as string;
-    
     const nodeRef = ref(database, nodeName);
 
     try {
         const snapshot = await get(nodeRef);
         const nodeData = snapshot.val();
 
+        let accs = [];
+
         if (nodeData) {
-            let foundUser = false;
-
             for (const nodeId of Object.keys(nodeData)) {
-                const node = nodeData[nodeId];
-
-                // console.log(node.nfcID)
-                // console.log(tagId)
-
-                if (node && node.NFCID === tagId) {
-                    foundUser = true;
-                    return {"message" : 'User Found', "data" : node};
-                }
+                accs.push(nodeData[nodeId]);
             }
-            if (!foundUser) {
-                return { "message" : "User Not found"}
-            }
+
+            return {"message" : "Accomodations Returned", "data" : accs}
         }
     }
-    catch (error) {
-        return `Error: Something went wrong: ${error}`
+    catch(error) {
+        return {"message" : "An Error Occured", "data" : error}
     }
 
 })
