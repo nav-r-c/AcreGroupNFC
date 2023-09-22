@@ -66,7 +66,7 @@
     const id = ref(route.params.id);
     provide('profileId', id.value);
 
-    const userDetails = await useFetch<UserDetailsResponse>(`/api/userDetails/fetch?tagId=${id.value}`)
+    const userDetails = await useFetch<UserDetailsResponse>(`/api/userDetails/fetch?tagId=${encodeURIComponent((id.value.toString() as string).split("~")[0])}`)
 
     interface UserDetailsResponse {
         message : string,

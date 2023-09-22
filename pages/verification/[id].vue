@@ -6,7 +6,7 @@
         <h1 class = "font-bold text-4xl my-5 text-white drop-shadow-xl">Profile Verification</h1>
 
         <form class = "flex flex-col mx-auto text-left">
-            <div class = "bg-[#0A5D00] flex flex-col text-white w-[400px] mx-auto rounded-lg px-5 py-10 shadow-lg">
+            <div class = "bg-[#0A5D00] flex flex-col text-white max-w-[400px] w-[80vw] mx-auto rounded-lg px-5 py-10 shadow-lg">
                 <label for = "phone-number" class = "mb-1 font-bold">Phone Number: </label>
                 <input class = "border-2 rounded-md p-1 outline-none text-black mb-5" id = "phone-number" placeholder="e.g. 95129226200" v-model="phoneNumber" required />
 
@@ -17,12 +17,11 @@
         </form>
     </div>
 
-    <div class = "text-white underline text-center absolute mx-auto left-0 right-0 text-xl bottom-0 my-5">
+    <img src = "/kodai-phone.png" class = "w-screen h-screen" />
+
+    <!-- <div class = "text-white underline text-center absolute mx-auto left-0 right-0 text-xl bottom-0 my-5">
         <NuxtLink to="/">Terms And Services</NuxtLink>
-    </div>
-    <div>
-        <img src = "/kodai.png" class ="h-screen w-screen">
-    </div>
+    </div> -->
 </template>
 
 <script setup lang="ts">
@@ -50,10 +49,10 @@
         // console.log(verifCode.value)
         // console.log(cardID)
         if (resp && resp.data) {
-            console.log(resp.data.value?.message)
+            // console.log(resp.data.value?.message)
 
             if (resp.data.value?.message === "User Verified and Tag Set") {
-                router.push(`/profile/${resp.data.value?.data.tagId}&${cardID}`);
+                router.push(`/profile/${resp.data.value?.data.tagId}~${cardID}`);
             }
             else {
                 if (resp.data.value?.message === "User Not Verified"){
@@ -66,7 +65,7 @@
             
         }
         else {
-            console.log("Response is null or does not have data")
+            alert("You are not in our records.")
         }
 
     }
