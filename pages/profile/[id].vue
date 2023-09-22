@@ -5,10 +5,10 @@
                 <img src ="~/public/logo.png" class = "mx-auto w-[50px]" alt = "acre group logo" />
 
                 <h1 class="font-bold text-white text-3xl md:text-4xl drop-shadow-lg drop-shadow-white my-5">Personal Profile</h1>
-                <div>
-                    <img :src = "(userDetails.data.value?.data as UserDetails).image" class = "w-[80%] circle-mask mx-auto my-5" alt = "member pfp"/>
-                    <img src = "/PremiumIcon.png" class = "mx-auto my-5 absolute top-0 right-0 mt-[35%] mr-[20%]">
+                <div class = "bg-[#1E2968] py-4 my-5 circle-mask">
+                    <img :src = "(userDetails.data.value?.data as UserDetails).image" class = "w-[80%] circle-mask mx-auto" alt = "member pfp"/>
                 </div>
+                <img src = "/PremiumIcon.png" class = "mx-auto my-5 absolute top-0 right-0 mt-[35%] mr-[20%] z-10">
                 <div>
                     <p class = "text-2xl md:text-5xl"><span class = 'font-bold'>{{ (userDetails.data.value?.data as UserDetails)?.name?.split(" ")[0] }}</span> <span>{{ (userDetails.data.value?.data as UserDetails)?.name?.split(" ").slice(1).join(" ") }}</span></p>
                     <div>
@@ -115,5 +115,6 @@
         mask-repeat: no-repeat;
         mask-position: center center;
         mask-size: contain;
+        mask-origin: border-box;
     }
 </style>
