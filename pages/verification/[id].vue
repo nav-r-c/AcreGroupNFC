@@ -52,7 +52,7 @@
             // console.log(resp.data.value?.message)
 
             if (resp.data.value?.message === "User Verified and Tag Set") {
-                router.push(`/profile/${resp.data.value?.data.tagId}~${cardID}`);
+                router.push(`/profile/${resp.data.value?.data.tagId}_${cardID}`);
             }
             else {
                 if (resp.data.value?.message === "User Not Verified"){
