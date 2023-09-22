@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src = "/logo-whitebg.png" class = "absolute z-10 mx-auto left-0 right-0 my-5" />
+        <img src = "/logo-whitebg.png" class = "absolute z-10 mx-auto left-0 right-0 my-5" alt = "acre-group-logo"/>
     </div>
     <div class = "mx-auto left-0 right-0 text-center font-[Roboto] absolute top-[25%] z-10">
         <h1 class = "font-bold text-4xl my-5 text-white drop-shadow-xl">Profile Verification</h1>
