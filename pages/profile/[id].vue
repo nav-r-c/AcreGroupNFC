@@ -112,7 +112,7 @@
     }
 
     .circle-mask {
-        mask-image: url("/Ellipse 7.png");
+        mask-image: url("/Ellipse7.png");
         mask-repeat: no-repeat;
         mask-position: center center;
         mask-size: contain;
