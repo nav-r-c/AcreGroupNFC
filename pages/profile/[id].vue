@@ -2,9 +2,13 @@
     <div v-if="userExists">
         <div class = "mx-auto text-center font-[Roboto] text-white">
             <div class = "bg-[#0A5D00] rounded-b-3xl mx-auto w-screen pt-5 pb-10">
-                <img src ="~/public/logo.png" class = "mx-auto w-[50px]" />
+                <img src ="~/public/logo.png" class = "mx-auto w-[50px]" alt = "acre group logo" />
+
                 <h1 class="font-bold text-white text-3xl md:text-4xl drop-shadow-lg drop-shadow-white my-5">Personal Profile</h1>
-                <img :src = "(userDetails.data.value?.data as UserDetails).image" class = "my-5 mx-auto circle-mask" />
+                <div>
+                    <img :src = "(userDetails.data.value?.data as UserDetails).image" class = "w-[80%] circle-mask mx-auto my-5" alt = "member pfp"/>
+                    <img src = "/PremiumIcon.png" class = "mx-auto my-5 absolute top-0 right-0 mt-[35%] mr-[20%]">
+                </div>
                 <div>
                     <p class = "text-2xl md:text-5xl"><span class = 'font-bold'>{{ (userDetails.data.value?.data as UserDetails)?.name?.split(" ")[0] }}</span> <span>{{ (userDetails.data.value?.data as UserDetails)?.name?.split(" ").slice(1).join(" ") }}</span></p>
                     <div>
@@ -12,7 +16,6 @@
                         <p class = "text-lg md:text-2xl">Valid from: <span class = "font-bold">{{ (userDetails.data.value?.data as UserDetails)?.validDate }}</span></p>
                     </div>
                 </div>
-                
                 
             </div>
         </div>
@@ -44,7 +47,7 @@
             </div>
             <div>
                 <DropCard cardTitle = "Aadhar Information">
-                    <img :src = "(userDetails.data.value?.data as UserDetails).aadhar" class = "rounded-lg border-2 border-grey mx-auto" />
+                    <img :src = "(userDetails.data.value?.data as UserDetails).aadhar" class = "rounded-lg border-2 border-grey mx-auto" alt = "member aadhar" />
                 </DropCard>
             </div>
         </div>
@@ -106,6 +109,7 @@
     * {
         box-sizing: border-box;
     }
+
     .circle-mask {
         mask-image: url("/Ellipse 7.png");
         mask-repeat: no-repeat;
