@@ -1,49 +1,54 @@
 <template>
     <div v-if="userExists">
         <div class = "mx-auto text-center font-[Roboto] text-white">
-            <div class = "bg-[#0A5D00] rounded-b-3xl mx-auto">
-                <img src ="~/public/logo.png" class = "mx-auto py-2 w-[50px]" />
-                <h1 class="font-bold text-white text-4xl my-5 drop-shadow-lg drop-shadow-white">Personal Profile</h1>
-                <img :src = "(userDetails.data.value?.data as UserDetails).image" class = "mx-auto max-w-[400px] w-auto" />
-                <p class = "text-3xl my-2"><span class = 'font-bold'>{{ (userDetails.data.value?.data as UserDetails)?.name?.split(" ")[0] }}</span> <span>{{ (userDetails.data.value?.data as UserDetails)?.name?.split(" ").slice(1).join(" ") }}</span></p>
-                <div class = "py-5 pb-20">
-                    <p class = "text-xl">Membership Status: <span class = "font-bold">{{ (userDetails.data.value?.data as UserDetails)?.membershipStatus }}</span></p>
-                    <p class = "text-xl">Valid from: <span class = "font-bold">{{ (userDetails.data.value?.data as UserDetails)?.validDate }}</span></p>
+            <div class = "bg-[#0A5D00] rounded-b-3xl mx-auto w-screen pt-5 pb-10">
+                <img src ="~/public/logo.png" class = "mx-auto w-[50px]" />
+                <h1 class="font-bold text-white text-3xl md:text-4xl drop-shadow-lg drop-shadow-white my-5">Personal Profile</h1>
+                <img :src = "(userDetails.data.value?.data as UserDetails).image" class = "my-5 mx-auto circle-mask" />
+                <div>
+                    <p class = "text-2xl md:text-5xl"><span class = 'font-bold'>{{ (userDetails.data.value?.data as UserDetails)?.name?.split(" ")[0] }}</span> <span>{{ (userDetails.data.value?.data as UserDetails)?.name?.split(" ").slice(1).join(" ") }}</span></p>
+                    <div>
+                        <p class = "text-lg md:text-2xl">Membership Status: <span class = "font-bold">{{ (userDetails.data.value?.data as UserDetails)?.membershipStatus }}</span></p>
+                        <p class = "text-lg md:text-2xl">Valid from: <span class = "font-bold">{{ (userDetails.data.value?.data as UserDetails)?.validDate }}</span></p>
+                    </div>
                 </div>
+                
                 
             </div>
         </div>
 
-        <div class = "-my-20">
-            <DropCard cardTitle = "Personal Information">
-                <div class = "py-2">
-                    <div class = "flex justify-between items-center my-1">
-                        <p>Phone Number:</p>
-                        <p>+91 {{ (userDetails.data.value?.data as UserDetails).phoneNumber?.slice(0, 5) }} {{ (userDetails.data.value?.data as UserDetails).phoneNumber?.slice(5) }}</p>
+        <div class = "-my-5 grid grid-cols-1 gap-10">
+            <div>
+                <DropCard cardTitle = "Personal Information">
+                    <div class = "py-2">
+                        <div class = "flex justify-between items-center my-1">
+                            <p>Phone Number:</p>
+                            <p>+91 {{ (userDetails.data.value?.data as UserDetails).phoneNumber?.slice(0, 5) }} {{ (userDetails.data.value?.data as UserDetails).phoneNumber?.slice(5) }}</p>
+                        </div>
+                        <div class = "flex justify-between items-center my-1">
+                            <p>E-Mail Address: </p>
+                            <p>{{ (userDetails.data.value?.data as UserDetails).email }}</p>
+                        </div>
+                        <div class = "flex justify-between items-center my-1">
+                            <p>Date Of Birth: </p>
+                            <p>{{ (userDetails.data.value?.data as UserDetails).dob }}</p>
+                        </div>
                     </div>
-                    <div class = "flex justify-between items-center my-1">
-                        <p>E-Mail Address: </p>
-                        <p>{{ (userDetails.data.value?.data as UserDetails).email }}</p>
+                    
+                    <hr class = "border-[#A3A1A1]" />
+                    <div class = "flex justify-between items-center mt-2">
+                        <h1 class = "font-bold text-md md:text-xl">Download Certicate </h1>
+                        <a :href = "(userDetails.data.value?.data as UserDetails).certificate" download target = "_blank"><span class="material-symbols-outlined">download</span></a>
                     </div>
-                    <div class = "flex justify-between items-center my-1">
-                        <p>Date Of Birth: </p>
-                        <p>{{ (userDetails.data.value?.data as UserDetails).dob }}</p>
-                    </div>
-                </div>
-                
-                <hr class = "border-[#A3A1A1]" />
-                <div class = "flex justify-between items-center mt-2">
-                    <h1 class = "font-bold text-xl">Download Certicate </h1>
-                    <a :href = "(userDetails.data.value?.data as UserDetails).certificate" download target = "_blank"><span class="material-symbols-outlined">download</span></a>
-                </div>
-            </DropCard>
+                </DropCard>
+            </div>
+            <div>
+                <DropCard cardTitle = "Aadhar Information">
+                    <img :src = "(userDetails.data.value?.data as UserDetails).aadhar" class = "rounded-lg border-2 border-grey mx-auto" />
+                </DropCard>
+            </div>
         </div>
 
-        <div class = "mt-[120px] mb-[100px]">
-            <DropCard cardTitle = "Aadhar Information">
-                <img :src = "(userDetails.data.value?.data as UserDetails).aadhar" class = "rounded-lg border-2 border-grey" />
-            </DropCard>
-        </div>
 
     </div>
 
@@ -96,3 +101,15 @@
     })
 
 </script>
+
+<style scoped>
+    * {
+        box-sizing: border-box;
+    }
+    .circle-mask {
+        mask-image: url("/Ellipse 7.png");
+        mask-repeat: no-repeat;
+        mask-position: center center;
+        mask-size: contain;
+    }
+</style>
