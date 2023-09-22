@@ -8,7 +8,8 @@
 </template>
 
 <script setup lang = 'ts'>
-    const profilePageRoute = computed(() => `/profile/${inject('profileId')}`)
+    const nuxtApp = useNuxtApp()
+    const profilePageRoute = computed(() => `/profile/${nuxtApp.$profileId}`)
 </script>
 
 <style scoped>
