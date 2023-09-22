@@ -7,11 +7,11 @@
 
                 <h1 class="font-bold text-white text-3xl md:text-4xl drop-shadow-lg drop-shadow-white my-5">Personal Profile</h1>
                 <div class = "bg-[#1E2968] py-4 my-5 circle-mask">
-                    <img :src = "(userDetails.data.value?.data as UserDetails).image" class = "w-[80%] circle-mask mx-auto" alt = "member pfp"/>
+                    <img :src = "(userDetails.data.value?.data as UserDetails).image" class = "w-[80%] circle-mask mx-auto max-w-[700px]" alt = "member pfp"/>
                 </div>
                 <img src = "/PremiumIcon.png" class = "mx-auto my-5 absolute top-0 right-0 mt-[35%] mr-[20%] z-10">
                 <div>
-                    <p class = "text-2xl md:text-5xl"><span class = 'font-bold'>{{ (userDetails.data.value?.data as UserDetails)?.name?.split(" ")[0] }}</span> <span>{{ (userDetails.data.value?.data as UserDetails)?.name?.split(" ").slice(1).join(" ") }}</span></p>
+                    <p class = "text-2xl md:text-5xl my-5"><span class = 'font-bold'>{{ (userDetails.data.value?.data as UserDetails)?.name?.split(" ")[0] }}</span> <span>{{ (userDetails.data.value?.data as UserDetails)?.name?.split(" ").slice(1).join(" ") }}</span></p>
                     <div>
                         <p class = "text-lg md:text-2xl">Membership Status: <span class = "font-bold">{{ (userDetails.data.value?.data as UserDetails)?.membershipStatus }}</span></p>
                         <p class = "text-lg md:text-2xl">Valid from: <span class = "font-bold">{{ (userDetails.data.value?.data as UserDetails)?.validDate }}</span></p>
@@ -64,6 +64,8 @@
 
     const route = useRoute();
     const id = ref(route.params.id);
+    provide('profileId', id.value);
+
     const userDetails = await useFetch<UserDetailsResponse>(`/api/userDetails/fetch?tagId=${id.value}`)
 
     interface UserDetailsResponse {
