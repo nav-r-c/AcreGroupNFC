@@ -8,8 +8,7 @@
 </template>
 
 <script setup lang = 'ts'>
-    const profileId = inject('profileId');
-    const profilePageRoute = computed(() => `/profile/${profileId}`)
+    const profilePageRoute = computed(() => `/profile/${inject('profileId')}`)
 </script>
 
 <style scoped>
