@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get } from "firebase/database";
+import { get, getDatabase, ref } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -15,7 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const KEY = process.env.ENCRYPT_KEY?.toString() as string;
-const nodeName = "cards";
+const nodeName = "NFCCardDetails";
 
 function customEncrypt(inputString : string , key : string) {
     const characters = process.env.CHARS?.toString() as string;
@@ -59,12 +59,16 @@ export default defineEventHandler(async (event) => {
     const cardParam = query.cardID?.toString() as string;
     // console.log(cardParam)
     const cardID = customDecrypt(cardParam, KEY).toString();
+    // console.log(cardID)
+    // console.log(database)
 
     const nodeRef = ref(database, nodeName);
 
     try {
         const snapshot = await get(nodeRef);
         const nodeData = snapshot.val();
+
+        console.log(nodeData)
 
         if (nodeData) { // not empty
             let foundUser = false;
@@ -80,7 +84,7 @@ export default defineEventHandler(async (event) => {
                 if (nodeId === cardID) {
                     // console.log(node.tagId);
                     if (node && node.tagId !== "none") {
-                        sendRedirect(event, `/profile/${customEncrypt(node.tagId, KEY)}&${customEncrypt(cardID, KEY)}`);
+                        sendRedirect(event, `/profile/${customEncrypt(node.tagId, KEY)}~${customEncrypt(cardID, KEY)}`);
                         break;
 
                     } else{
@@ -98,7 +102,7 @@ export default defineEventHandler(async (event) => {
             return "Error: Node Does not Exist";
         }
     } catch (error) {
-        return "Error: Something went wrong";
+        return `Error: Something went wrong: ${error}`;
     }
 });
 

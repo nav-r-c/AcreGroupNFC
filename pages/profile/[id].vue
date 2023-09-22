@@ -1,44 +1,101 @@
 <template>
-    <div>
-        <h1>Profile Page</h1>
-        <div v-if="userExists">
-            <p>Name: {{ (userDetails.data.value?.data as UserDetails)?.name }}</p>
-            <p>Phone Number: {{ (userDetails.data.value?.data as UserDetails)?.phoneNumber }}</p>
-            <p>DOB: {{ (userDetails.data.value?.data as UserDetails)?.dob }}</p>
-            <p>E-Mail: {{ (userDetails.data.value?.data as UserDetails)?.email }}</p>
+    <div v-if="userExists">
+        <NuxtLayout name = "main-pages">
+        <div class = "mx-auto text-center font-[Roboto] text-white">
+            <div class = "bg-[#0A5D00] rounded-b-3xl mx-auto w-screen pt-5 pb-10">
+                <img src ="/logo.png" class = "mx-auto w-[50px]" alt = "acre group logo" />
+
+                <h1 class="font-bold text-white text-3xl md:text-4xl drop-shadow-lg drop-shadow-white my-5">Personal Profile</h1>
+                <div class = "bg-[#1E2968] py-4 my-5 circle-mask">
+                    <img :src = "(userDetails.data.value?.data as UserDetails).DpUrl" class = "w-[80%] circle-mask mx-auto max-w-[700px]" alt = "member pfp"/>
+                </div>
+                <img src = "/PremiumIcon.png" class = "mx-auto my-5 absolute top-0 right-0 mt-[35%] mr-[20%] z-10">
+                <div>
+                    <p class = "text-2xl md:text-5xl my-5"><span class = 'font-bold'>{{ (userDetails.data.value?.data as UserDetails)?.Name?.split(" ")[0] }}</span> <span>{{ (userDetails.data.value?.data as UserDetails)?.Name?.split(" ").slice(1).join(" ") }}</span></p>
+                    <div>
+                        <p class = "text-lg md:text-2xl">Membership Status: <span class = "font-bold">{{ (userDetails.data.value?.data as UserDetails)?.MembershipStatus }}</span></p>
+                        <p class = "text-lg md:text-2xl">Valid from: <span class = "font-bold">{{ (userDetails.data.value?.data as UserDetails)?.validityStartDate }}</span></p>
+                    </div>
+                </div>
+                
+            </div>
         </div>
-        <div v-else>
-            <h1>User Does not exist</h1>
+
+        <div class = "-my-5 mb-20 grid grid-cols-1 gap-10">
+            <div>
+                <DropCard cardTitle = "Personal Information">
+                    <div class = "py-2">
+                        <div class = "flex justify-between items-center my-1">
+                            <p class = "text-md">Phone Number:</p>
+                            <p>+91 {{ (userDetails.data.value?.data as UserDetails).Phone?.slice(0, 5) }} {{ (userDetails.data.value?.data as UserDetails).Phone?.slice(5) }}</p>
+                        </div>
+                        <div class = "flex justify-between items-center my-1">
+                            <p class = "text-md">E-Mail Address: </p>
+                            <p>{{ (userDetails.data.value?.data as UserDetails).Email }}</p>
+                        </div>
+                        <div class = "flex justify-between items-center my-1">
+                            <p class = "text-md">Date Of Birth: </p>
+                            <p>{{ (userDetails.data.value?.data as UserDetails).DOB }}</p>
+                        </div>
+                    </div>
+                    
+                    <hr class = "border-[#A3A1A1]" />
+                    <div class = "flex justify-between items-center mt-2">
+                        <h1 class = "font-bold text-md md:text-xl">Download Certicate </h1>
+                        <a :href = "(userDetails.data.value?.data as UserDetails).certificateUrl" download = "certificate.pdf"><span class="material-symbols-outlined">download</span></a>
+                    </div>
+                </DropCard>
+            </div>
+            <div>
+                <DropCard cardTitle = "ID Proof">
+                    <img :src = "(userDetails.data.value?.data as UserDetails).proofUrl" class = "rounded-lg border-2 border-grey mx-auto" alt = "member aadhar" />
+                </DropCard>
+            </div>
         </div>
+        </NuxtLayout>
+    </div>
+
+    <div v-else>
+        <h1>User Does not exist</h1>
     </div>
 </template>
 
 <script setup lang="ts">
+
     const route = useRoute();
     const id = ref(route.params.id);
-    const userDetails = await useFetch<UserDetailsResponse>(`/api/userDetails/fetch?tagId=${id.value}`)
+    
+    provide('profileId', id.value);
+
+    const userDetails = await useFetch<UserDetailsResponse>(`/api/userDetails/fetch?tagId=${(id.value.toString() as string).split("_")[0]}`)
 
     interface UserDetailsResponse {
         message : string,
         data : {
-            dob? : string,
-            email? : string,
-            membershipStatus? : string,
-            name? : string,
-            nfcID? : string,
-            phoneNumber? : string,
-            verified? : boolean
+            Email? : string,
+            MembershipStatus? : string,
+            Name? : string,
+            NFCID? : string,
+            Phone? : string,
+            DpUrl? : string,
+            validityStartDate? : string,
+            proofUrl? : string,
+            certificateUrl? : string,
+            DOB? : string
         } | string
     }
 
     interface UserDetails {
-        dob? : string,
-        email? : string,
-        membershipStatus? : string,
-        name? : string,
-        nfcID? : string,
-        phoneNumber? : string,
-        verified? : boolean
+        Email? : string,
+        MembershipStatus? : string,
+        Name? : string,
+        NFCID? : string,
+        Phone? : string,
+        DpUrl? : string,
+        validityStartDate? : string,
+        proofUrl? : string,
+        certificateUrl? : string,
+        DOB? : string
     }
 
     const userExists = computed(() => {
@@ -48,3 +105,17 @@
     })
 
 </script>
+
+<style scoped>
+    * {
+        box-sizing: border-box;
+    }
+
+    .circle-mask {
+        mask-image: url("/Ellipse 7.png");
+        mask-repeat: no-repeat;
+        mask-position: center center;
+        mask-size: contain;
+        mask-origin: border-box;
+    }
+</style>

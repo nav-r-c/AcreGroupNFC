@@ -1,6 +1,6 @@
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, set } from "firebase/database";
 import axios from "axios";
+import { initializeApp } from "firebase/app";
+import { get, getDatabase, ref, set } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -21,16 +21,16 @@ function customEncrypt(inputString : string , key : string) {
     const characters = process.env.CHARS?.toString() as string;
     let encryptedString = '';
     for (let i = 0; i < inputString.length; i++) {
-      const char = inputString.charAt(i);
-      const charIndex = characters.indexOf(char);
-      if (charIndex !== -1) { // Check if the character is in characters
-        const keyChar = key.charCodeAt(i % key.length) % characters.length;
-        const encryptedChar = (charIndex + keyChar) % characters.length;
-        encryptedString += characters.charAt(encryptedChar);
-      } else {
-        // Handle characters not in characters string, you can skip or handle them as needed
-        encryptedString += char;
-      }
+		const char = inputString.charAt(i);
+		const charIndex = characters.indexOf(char);
+		if (charIndex !== -1) { // Check if the character is in characters
+			const keyChar = key.charCodeAt(i % key.length) % characters.length;
+			const encryptedChar = (charIndex + keyChar) % characters.length;
+			encryptedString += characters.charAt(encryptedChar);
+		} else {
+			// Handle characters not in characters string, you can skip or handle them as needed
+			encryptedString += char;
+		}
     }
     return encryptedString;
   }
@@ -38,27 +38,29 @@ function customDecrypt(encryptedString : string, key : string) {
     const characters = process.env.CHARS?.toString() as string;
     let decryptedString = '';
     for (let i = 0; i < encryptedString.length; i++) {
-      const char = encryptedString.charAt(i);
-      const charIndex = characters.indexOf(char);
-      if (charIndex !== -1) { // Check if the character is in characters
-        const keyChar = key.charCodeAt(i % key.length) % characters.length;
-        const decryptedChar = (charIndex - keyChar + characters.length) % characters.length;
-        decryptedString += characters.charAt(decryptedChar);
-      } else {
-        // Handle characters not in characters string, you can skip or handle them as needed
-        decryptedString += char;
-      }
+		const char = encryptedString.charAt(i);
+		const charIndex = characters.indexOf(char);
+		if (charIndex !== -1) { // Check if the character is in characters
+			const keyChar = key.charCodeAt(i % key.length) % characters.length;
+			const decryptedChar = (charIndex - keyChar + characters.length) % characters.length;
+			decryptedString += characters.charAt(decryptedChar);
+		} else {
+			// Handle characters not in characters string, you can skip or handle them as needed
+			decryptedString += char;
+		}
     }
     return decryptedString;
 }
 
-const nodeName = "cards"
+const nodeName = "NFCCardDetails"
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
     const cardID = customDecrypt(query.cardID?.toString() as string, KEY).toString() as string;
 	const phoneNumber = query.phoneNumber?.toString() as string;
 	const verifCode = query.verifCode?.toString() as string;
+
+    // console.log('Card', cardID)
 
 	const currentDomain = event.req.headers.host
     const nodeRef = ref(database, nodeName)
@@ -71,16 +73,18 @@ export default defineEventHandler(async (event) => {
             const nodeData = snapshot.val()
 
             if (nodeData) {
-                const foundNodeKey = Object.keys(nodeData).find((nodeId) => {return nodeId === cardID})
+                const foundNodeKey = Object.keys(nodeData).find((nodeId) => {console.log(nodeId); console.log(cardID); return nodeId === cardID})
 
                 if (foundNodeKey) {
                     const cardRef = ref(database, `${nodeName}/${foundNodeKey}`)
+
+                    // console.log(cardRef)
 
                     await set(cardRef, {
                         tagId : verifCode
                     })
 
-                    return {"message" : "User Verified and Tag Set", "data" : {"tagId": customEncrypt(resp.data.data.nfcID, KEY)}}
+                    return {"message" : "User Verified and Tag Set", "data" : {"tagId": customEncrypt(resp.data.data.NFCID, KEY)}}
                 }
                 else {
                     return {"message" : "Card Not Found"}
@@ -92,9 +96,12 @@ export default defineEventHandler(async (event) => {
             console.log(`Error: ${error} `)
         }
     }
-    else {
-        // console.log(resp.data.data)
+    else if (resp.data.message === "User Not Verified"){
+        console.log(resp.data.data)
         return {"message" : "User Not Verified"}
+    }
+    else {
+      return resp.data
     }
 
     

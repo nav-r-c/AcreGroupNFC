@@ -1,6 +1,6 @@
+import axios from "axios";
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-import axios from "axios";
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -14,7 +14,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
 const KEY = process.env.ENCRYPT_KEY?.toString() as string;
 
 function customEncrypt(inputString : string , key : string) {
@@ -54,9 +53,8 @@ function customDecrypt(encryptedString : string, key : string) {
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
-	const cardID = query.cardID?.toString() as string;
-	const phoneNumber = query.phoneNumber?.toString() as string;
-	const verifCode = query.verifCode?.toString() as string;
+    const phoneNumber = query.phoneNumber?.toString() as string;
+    const verifCode = query.verifCode?.toString() as string;
 
 	// console.log(tagId)
 	const currentDomain = event.req.headers.host
@@ -64,7 +62,7 @@ export default defineEventHandler(async (event) => {
 	const resp = await axios.get(`http://${currentDomain}/api/userDetails/fetch?tagId=${customEncrypt(verifCode, KEY)}`)
 
 	if (resp.data.message == "User Found") {
-		if ((resp.data.data['phoneNumber'] === phoneNumber) && (resp.data.data['nfcID'] == verifCode)) {
+		if ((resp.data.data['Phone'] === phoneNumber) && (resp.data.data['NFCID'] == verifCode)) {
 			return {"message" : "User Verified", "data" : resp.data.data}
 		}
 		else {
