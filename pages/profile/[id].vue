@@ -74,18 +74,7 @@
 
     interface UserDetailsResponse {
         message : string,
-        data : {
-            Email? : string,
-            MembershipStatus? : string,
-            Name? : string,
-            NFCID? : string,
-            Phone? : string,
-            DpUrl? : string,
-            validityStartDate? : string,
-            proofUrl? : string,
-            certificateUrl? : string,
-            DOB? : string
-        } | string
+        data : UserDetails
     }
 
     interface UserDetails {
