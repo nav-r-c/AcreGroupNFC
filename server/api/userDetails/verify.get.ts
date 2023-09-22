@@ -1,6 +1,6 @@
+import axios from "axios";
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-import axios from "axios";
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -64,7 +64,7 @@ export default defineEventHandler(async (event) => {
 	const resp = await axios.get(`http://${currentDomain}/api/userDetails/fetch?tagId=${customEncrypt(verifCode, KEY)}`)
 
 	if (resp.data.message == "User Found") {
-		if ((resp.data.data['phoneNumber'] === phoneNumber) && (resp.data.data['nfcID'] == verifCode)) {
+		if ((resp.data.data['phoneNumber'] === phoneNumber) && (resp.data.data['NFCID'] == verifCode)) {
 			return {"message" : "User Verified", "data" : resp.data.data}
 		}
 		else {

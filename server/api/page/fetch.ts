@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get } from "firebase/database";
+import { get, getDatabase, ref } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -15,7 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const KEY = process.env.ENCRYPT_KEY?.toString() as string;
-const nodeName = "cards";
+const nodeName = "NFCCardDetails";
 
 function customEncrypt(inputString : string , key : string) {
     const characters = process.env.CHARS?.toString() as string;

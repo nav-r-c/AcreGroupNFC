@@ -1,6 +1,6 @@
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, set } from "firebase/database";
 import axios from "axios";
+import { initializeApp } from "firebase/app";
+import { get, getDatabase, ref, set } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -52,7 +52,7 @@ function customDecrypt(encryptedString : string, key : string) {
     return decryptedString;
 }
 
-const nodeName = "cards"
+const nodeName = "NFCCardDetails"
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
@@ -80,7 +80,7 @@ export default defineEventHandler(async (event) => {
                         tagId : verifCode
                     })
 
-                    return {"message" : "User Verified and Tag Set", "data" : {"tagId": customEncrypt(resp.data.data.nfcID, KEY)}}
+                    return {"message" : "User Verified and Tag Set", "data" : {"tagId": customEncrypt(resp.data.data.NFCID, KEY)}}
                 }
                 else {
                     return {"message" : "Card Not Found"}

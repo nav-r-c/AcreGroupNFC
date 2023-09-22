@@ -61,32 +61,28 @@
     interface UserDetailsResponse {
         message : string,
         data : {
-            dob? : string,
-            email? : string,
-            membershipStatus? : string,
-            name? : string,
-            nfcID? : string,
-            phoneNumber? : string,
-            image? : string,
-            validDate? : string,
-            verified? : boolean,
-            aadhar? : string,
-            certificate? : string
+            Email? : string,
+            MembershipStatus? : string,
+            Name? : string,
+            NFCID? : string,
+            Phone? : string,
+            DpUrl? : string,
+            validityStartDate? : string,
+            proofUrl? : string,
+            certificateUrl? : string
         } | string
     }
 
     interface UserDetails {
-        dob? : string,
-        email? : string,
-        membershipStatus? : string,
-        name? : string,
-        nfcID? : string,
-        phoneNumber? : string,
-        image? : string,
-        validDate? : string,
-        verified? : boolean,
-        aadhar? : string,
-        certificate? : string
+        Email? : string,
+        MembershipStatus? : string,
+        Name? : string,
+        NFCID? : string,
+        Phone? : string,
+        DpUrl? : string,
+        validityStartDate? : string,
+        proofUrl? : string,
+        certificateUrl? : string
     }
 
     const userExists = computed(() => {
