@@ -1,6 +1,6 @@
+import axios from "axios";
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-import axios from "axios";
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -14,7 +14,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
 const KEY = process.env.ENCRYPT_KEY?.toString() as string;
 
 function customEncrypt(inputString : string , key : string) {

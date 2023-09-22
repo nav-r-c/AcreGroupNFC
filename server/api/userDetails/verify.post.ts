@@ -1,6 +1,6 @@
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, set } from "firebase/database";
 import axios from "axios";
+import { initializeApp } from "firebase/app";
+import { get, getDatabase, ref, set } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
