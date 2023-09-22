@@ -15,7 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const KEY = process.env.ENCRYPT_KEY?.toString() as string;
-const nodeName = "cards";
+const nodeName = "NFCCardDetails";
 
 function customEncrypt(inputString : string , key : string) {
     const characters = process.env.CHARS?.toString() as string;
@@ -59,12 +59,16 @@ export default defineEventHandler(async (event) => {
     const cardParam = query.cardID?.toString() as string;
     // console.log(cardParam)
     const cardID = customDecrypt(cardParam, KEY).toString();
+    // console.log(cardID)
+    // console.log(database)
 
     const nodeRef = ref(database, nodeName);
 
     try {
         const snapshot = await get(nodeRef);
         const nodeData = snapshot.val();
+
+        console.log(nodeData)
 
         if (nodeData) { // not empty
             let foundUser = false;
@@ -98,7 +102,7 @@ export default defineEventHandler(async (event) => {
             return "Error: Node Does not Exist";
         }
     } catch (error) {
-        return "Error: Something went wrong";
+        return `Error: Something went wrong: ${error}`;
     }
 });
 

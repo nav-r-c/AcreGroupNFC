@@ -15,7 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const KEY = process.env.ENCRYPT_KEY?.toString() as string;
-const nodeName = "users";
+const nodeName = "UserData";
 
 function customEncrypt(inputString : string , key : string) {
     const characters = process.env.CHARS?.toString() as string;
@@ -72,7 +72,7 @@ export default defineEventHandler(async (event) => {
                 // console.log(node.nfcID)
                 // console.log(tagId)
 
-                if (node && node.nfcID === tagId) {
+                if (node && node.NFCID === tagId) {
                     foundUser = true;
                     return {"message" : 'User Found', "data" : node};
                 }
@@ -83,7 +83,7 @@ export default defineEventHandler(async (event) => {
         }
     }
     catch (error) {
-        return "Error: Something went wrong."
+        return `Error: Something went wrong: ${error}`
     }
 
 })

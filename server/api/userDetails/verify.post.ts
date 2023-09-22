@@ -52,13 +52,15 @@ function customDecrypt(encryptedString : string, key : string) {
     return decryptedString;
 }
 
-const nodeName = "cards"
+const nodeName = "NFCCardDetails"
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
     const cardID = customDecrypt(query.cardID?.toString() as string, KEY).toString() as string;
 	const phoneNumber = query.phoneNumber?.toString() as string;
 	const verifCode = query.verifCode?.toString() as string;
+
+    // console.log('Card', cardID)
 
 	const currentDomain = event.req.headers.host
     const nodeRef = ref(database, nodeName)
@@ -76,11 +78,13 @@ export default defineEventHandler(async (event) => {
                 if (foundNodeKey) {
                     const cardRef = ref(database, `${nodeName}/${foundNodeKey}`)
 
+                    // console.log(cardRef)
+
                     await set(cardRef, {
                         tagId : verifCode
                     })
 
-                    return {"message" : "User Verified and Tag Set", "data" : {"tagId": customEncrypt(resp.data.data.nfcID, KEY)}}
+                    return {"message" : "User Verified and Tag Set", "data" : {"tagId": customEncrypt(resp.data.data.NFCID, KEY)}}
                 }
                 else {
                     return {"message" : "Card Not Found"}
