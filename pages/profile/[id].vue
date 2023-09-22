@@ -68,7 +68,7 @@
     const nuxtApp = useNuxtApp();
     if (!nuxtApp.$profileId) {
         nuxtApp.provide('profileId', id.value);
-``    }
+    }
 
     const userDetails = await useFetch<UserDetailsResponse>(`/api/userDetails/fetch?tagId=${(id.value.toString() as string).split("_")[0]}`)
 
