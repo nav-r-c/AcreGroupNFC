@@ -21,8 +21,6 @@
         imageLink? : string,
         location? : string,
         mapLink? : string,
-        phoneNumber? : string,
-        rating? : string,
         title? : string
     }
 
@@ -31,8 +29,6 @@
         imageLink : "/kodai.png",
         location: "Somewhere",
         mapLink: "https://www.google.com/maps",
-        phoneNumber: "1234567890",
-        rating: "5",
         title: "A very nice place"
     })
 
