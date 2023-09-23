@@ -32,7 +32,7 @@
         title: "A very nice place"
     })
 
-    const cardLink = computed(() => `/${props.title.replace(/ /g, '+')}`)
+    const cardLink = computed(() => `/accommodations/${props.title.replace(/ /g, '+')}`)
 
 
 </script>
