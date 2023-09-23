@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class = "-my-5 mb-20 grid grid-cols-1 gap-10">
+        <div class = "-my-5 mb-20 grid grid-cols-1 gap-10 text-[#3D3D3D]">
             <div>
                 <DropCard cardTitle = "Personal Information">
                     <div class = "py-2">
