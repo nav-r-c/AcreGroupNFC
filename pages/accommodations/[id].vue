@@ -5,7 +5,8 @@
             <div class = "font-[Roboto] text-center py-5 pb-20 rounded-b-xl bg-[#0A5D00] text-[#1E2968]">
                 <img src = "/logo-whitebg.png" class = "mx-auto" alt = "logo"/>
                 <h1 class = 'font-bold text-3xl text-white drop-shadow-lg my-2'>Accommodations</h1>
-                <img :src = "(data.data.value?.data as AccDetails).topImageUrl1">
+
+                <Carousel :images = "images"/>
 
                 <div class = "my-2">
                     <h1 class = "text-white text-lg font-bold">{{ id.split('+').join(' ').trim() }}</h1>
@@ -26,7 +27,7 @@
                 </div>
 
                 <div class = "mx-auto bg-[#0A5D00] text-center text-white p-5 w-[90%] rounded-lg">
-                    <div>Call Us at <span class = "font-bold">+91 {{ (dataBrief.data.value?.data as Accs).phoneNumber?.slice(0, 5) }} {{ (dataBrief.data.value?.data as Accs).phoneNumber?.slice(5) }}</span></div>
+                    <a :href = "`tel:${(dataBrief.data.value?.data as Accs).phoneNumber}`"><div>Call Us at <span class = "font-bold">+91 {{ (dataBrief.data.value?.data as Accs).phoneNumber?.slice(0, 5) }} {{ (dataBrief.data.value?.data as Accs).phoneNumber?.slice(5) }}</span></div></a>
                 </div>
 
                 <!-- <h1 class = "text-center font-bold mt-5 mb-2">Download The App: </h1>
@@ -96,6 +97,13 @@
 
     const data = await useFetch<AccsResp>(`/api/accDetails/fetchDetails?accName=${id}`)
     const dataBrief = await useFetch<AccsBriefResp>(`/api/accDetails/fetch?accName=${id}`)
+
+    const images = [
+        (data.data.value?.data as AccDetails).topImageUrl1,
+        (data.data.value?.data as AccDetails).topImageUrl2,
+        (data.data.value?.data as AccDetails).topImageUrl3,
+        (data.data.value?.data as AccDetails).topImageUrl4,
+    ]
 
     const accFound = computed(() => data.data.value?.message === "Accommodation Found" && dataBrief.data.value?.message === "Accommodation Found")
 
