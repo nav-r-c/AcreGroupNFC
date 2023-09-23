@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class = "mb-20">
         <slot></slot>
     </div>
     <Navbar />
