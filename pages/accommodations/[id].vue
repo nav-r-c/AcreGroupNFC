@@ -49,9 +49,10 @@
 
         </div>
         <div v-else>
-            <div class = "font-[Roboto] text-center">
+            <div class = "font-[Roboto] text-center bg-[#0A5D00] text-white p-20 rounded-b-3xl">
                 <img src = "/logo-whitebg.png" class = "mx-auto" alt = "logo"/>
-                <h1>Accommodation Doesn't Exist</h1>
+                <h1 class = "text-3xl font-bold my-5">Information On This Accommodation is Unavailable</h1>
+                <NuxtLink to="/accommodations" class = "underline">Go Back To List</NuxtLink>
             </div>
         </div>
     </NuxtLayout>
