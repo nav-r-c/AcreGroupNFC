@@ -1,6 +1,6 @@
 <template>
     <NuxtLayout name = "main-pages">
-        <div v-if="accFound">
+        <div v-if="accFound" class = "font-[Roboto]">
             <!-- {{ (data.data.value?.data as AccDetails).description }} -->
             <div class = "font-[Roboto] text-center py-5 pb-20 rounded-b-xl bg-[#0A5D00] text-[#1E2968]">
                 <img src = "/logo-whitebg.png" class = "mx-auto" alt = "logo"/>
@@ -9,7 +9,8 @@
 
                 <div class = "my-2">
                     <h1 class = "text-white text-lg font-bold">{{ id.split('+').join(' ').trim() }}</h1>
-                    <NuxtLink :to="(data.data.value?.data as Accs).mapLink"><p class = "text-white text-[0.75rem] w-[80%] mx-auto my-1 flex justify-center items-center"><span class="material-symbols-outlined text-white text-sm">location_on</span>{{ (data.data.value?.data as AccDetails).location }}</p></NuxtLink>
+                    <NuxtLink :to="(dataBrief.data.value?.data as Accs).mapLink"><p class = "text-white text-[0.75rem] w-[80%] mx-auto my-1 flex justify-center items-center"><span class="material-symbols-outlined text-white text-sm">location_on</span>{{ (data.data.value?.data as AccDetails).location }}</p></NuxtLink>
+                    <!-- <p class = "text-white text-[0.75rem] w-[80%] mx-auto my-1 flex justify-center items-center"><span class="material-symbols-outlined text-white text-sm">location_on</span>{{ (data.data.value?.data as AccDetails).location }}</p></NuxtLink> -->
                 </div>
             </div>
 
@@ -22,6 +23,25 @@
 
                     <img :src="(data.data.value?.data?.imageUrl2)" class = "my-5 w-[90%] mx-auto rounded-lg whitespace-break-spaces" />
                     <p class = "mx-auto text-sm text-center w-[80%] my-5 " v-html="formattedDesc3"></p>
+                </div>
+
+                <div class = "mx-auto bg-[#0A5D00] text-center text-white p-5 w-[90%] rounded-lg">
+                    <div>Call Us at <span class = "font-bold">+91 {{ (dataBrief.data.value?.data as Accs).phoneNumber?.slice(0, 5) }} {{ (dataBrief.data.value?.data as Accs).phoneNumber?.slice(5) }}</span></div>
+                </div>
+
+                <h1 class = "text-center font-bold mt-5 mb-2">Download The App: </h1>
+                <div class = "flex justify-between w-[90%] gap-5 mx-auto">
+                    <div class = "mx-auto bg-[#0A5D00] text-center text-white p-5 w-[50%] rounded-lg">
+                        <NuxtLink to="/">
+                            <span></span>
+                        </NuxtLink>
+                    </div>
+                    <div class = "mx-auto bg-[#0A5D00] text-center text-white p-5 w-[50%] rounded-lg">
+                        <NuxtLink to="/">
+                            <span></span>
+                        </NuxtLink>
+                    </div>
+
                 </div>
             
             </div>
@@ -74,27 +94,29 @@
         title? : string
     }
 
-    const accFound = computed(() => data.data.value?.message === "Accommodation Found")
+    const data = await useFetch<AccsResp>(`/api/accDetails/fetchDetails?accName=${id}`)
+    const dataBrief = await useFetch<AccsBriefResp>(`/api/accDetails/fetch?accName=${id}`)
+
+    const accFound = computed(() => data.data.value?.message === "Accommodation Found" && dataBrief.data.value?.message === "Accommodation Found")
 
     const formattedDesc = computed(() => {
         const description = data.data.value?.data?.description?.toString() || '';
-        const lines = description.split('\\n').filter(Boolean); // Split the string and remove empty lines
+        const lines = description.split('\\n').filter(Boolean);
         return lines.join('<br><br>');
     });
 
     const formattedDesc2 = computed(() => {
         const description = data.data.value?.data?.description2?.toString() || '';
-        const lines = description.split('\\n').filter(Boolean); // Split the string and remove empty lines
+        const lines = description.split('\\n').filter(Boolean);
         return lines.join('<br><br>');
     });
 
     const formattedDesc3 = computed(() => {
         const description = data.data.value?.data?.description3?.toString() || '';
-        const lines = description.split('\\n').filter(Boolean); // Split the string and remove empty lines
+        const lines = description.split('\\n').filter(Boolean);
         return lines.join('<br><br>');
     });
 
-    const data = await useFetch<AccsResp>(`/api/accDetails/fetchDetails?accName=${id}`)
-    const dataBrief = await useFetch<AccsBriefResp>(`/api/accDetails/fetch?accName=${id}`)
+
 </script>
 
