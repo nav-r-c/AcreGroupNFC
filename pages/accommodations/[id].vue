@@ -29,7 +29,7 @@
                     <div>Call Us at <span class = "font-bold">+91 {{ (dataBrief.data.value?.data as Accs).phoneNumber?.slice(0, 5) }} {{ (dataBrief.data.value?.data as Accs).phoneNumber?.slice(5) }}</span></div>
                 </div>
 
-                <h1 class = "text-center font-bold mt-5 mb-2">Download The App: </h1>
+                <!-- <h1 class = "text-center font-bold mt-5 mb-2">Download The App: </h1>
                 <div class = "flex justify-between w-[90%] gap-5 mx-auto">
                     <div class = "mx-auto bg-[#0A5D00] text-center text-white p-5 w-[50%] rounded-lg">
                         <NuxtLink to="/">
@@ -42,7 +42,7 @@
                         </NuxtLink>
                     </div>
 
-                </div>
+                </div> -->
             
             </div>
 

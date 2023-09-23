@@ -6,7 +6,7 @@
             <h1 class = "font-semibold text-lg">{{ props.title }}</h1>
             <NuxtLink :to="props.mapLink" class = "flex justify-center items-center"><span class="material-symbols-outlined text-[#0A5D00]">location_on</span><p class = "text-sm">{{ props.location }}</p></NuxtLink>
         </div>
-        <p class = "w-[80%] mx-auto text-sm my-1">{{ props.description }}</p>
+        <p class = "w-[80%] mx-auto text-sm my-1 text-[#3D3D3D]">{{ props.description }}</p>
 
         <div class = "mt-5">
             <NuxtLink :to="cardLink" class = "bg-[#0A5D00] text-white p-2 rounded-md">Know More</NuxtLink>
