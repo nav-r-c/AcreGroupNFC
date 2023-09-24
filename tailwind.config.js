@@ -10,6 +10,13 @@ module.exports = {
     "./node_modules/flowbite/**/*.{js,ts}"
   ],
   theme: {
+    colors : {
+      'alt-green' : '#208D0F',
+      'primary-green' : '#0A5D00',
+      'circle-silver' : "#D3D3D3",
+      'primary-gold' : '#C69320',
+      'light-gold' : '#EEB60980' 
+    },
     extend: {},
   },
   plugins: [

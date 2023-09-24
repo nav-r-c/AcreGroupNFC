@@ -2,14 +2,14 @@
     <div v-if="userExists">
         <NuxtLayout name = "main-pages">
         <div class = "mx-auto text-center font-[Roboto] text-white">
-            <div class = "bg-[#0A5D00] rounded-b-3xl mx-auto w-screen pt-5 pb-10">
+            <div class = "bg-primary-green rounded-b-3xl mx-auto w-screen pt-5 pb-10">
                 <img src ="/logo.png" class = "mx-auto w-[50px]" alt = "acre group logo" />
 
                 <h1 class="font-bold text-white text-3xl md:text-4xl drop-shadow-lg drop-shadow-white my-5">Personal Profile</h1>
-                <div class = "bg-[#1E2968] py-4 my-5 circle-mask">
-                    <img :src = "(userDetails.data.value?.data as UserDetails).DpUrl" class = "w-[60%] circle-mask mx-auto max-w-[700px]" alt = "member pfp"/>
+                <div class = "bg-white bg-gradient-to-b from-primary-gold via-light-gold to-primary-gold  py-2 my-5 circle-mask">
+                    <img :src = "(userDetails.data.value?.data as UserDetails).DpUrl" class = "w-[45%] circle-mask mx-auto" alt = "member pfp"/>
                 </div>
-                <img src = "/PremiumIcon.png" class = "mx-auto my-5 absolute top-0 right-0 mt-[35%] mr-[20%] z-10">
+                <img src = "/PremiumIcon.png" class = "mx-auto my-5 w-[20%] absolute top-0 right-0 mt-[35%] mr-[28%] z-10">
                 <div>
                     <p class = "text-2xl md:text-5xl my-5"><span class = 'font-bold'>{{ (userDetails.data.value?.data as UserDetails)?.Name?.split(" ")[0] }}</span> <span>{{ (userDetails.data.value?.data as UserDetails)?.Name?.split(" ").slice(1).join(" ") }}</span></p>
                     <div>

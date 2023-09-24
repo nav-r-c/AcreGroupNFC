@@ -2,7 +2,7 @@
     <div>
         <NuxtLayout name = "main-pages">
             <div class = "mb-[280px]">
-                <div class = "bg-[#0A5D00] py-5 rounded-b-xl pb-[35%]">
+                <div class = "bg-primary-green py-5 rounded-b-xl pb-[35%]">
                     <img src = "/logo-whitebg.png" class = "mx-auto" alt = "logo"/>
                     <h1 class = "text-white drop-shadow-lg font-bold text-center font-[Roboto] text-3xl mb-10">Accommodations</h1> 
                 </div>
