@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
         const snapshot = await get(nodeRef);
         const nodeData = snapshot.val();
 
-        console.log(nodeData)
+        // console.log(nodeData)
 
         if (nodeData) { // not empty
             let foundUser = false;
@@ -42,7 +42,7 @@ export default defineEventHandler(async (event) => {
             for (const nodeId of Object.keys(nodeData)) {
                 const node = nodeData[nodeId];
                 // console.log(nodeId)
-                // console.log(cardID)
+                console.log(cardID)
                 // console.log(nodeId.length)
                 // console.log(cardID.length)
 

@@ -40,7 +40,7 @@ export default defineEventHandler(async (event) => {
             const nodeData = snapshot.val()
 
             if (nodeData) {
-                const foundNodeKey = Object.keys(nodeData).find((nodeId) => {console.log(nodeId); console.log(cardID); return nodeId === cardID})
+                const foundNodeKey = Object.keys(nodeData).find((nodeId) => {return nodeId === cardID})
 
                 if (foundNodeKey) {
                     const cardRef = ref(database, `${nodeName}/${foundNodeKey}`)
@@ -65,6 +65,9 @@ export default defineEventHandler(async (event) => {
     }
     else if (resp.data.message === "User Not Verified"){
         console.log(resp.data.data)
+        console.log(phoneNumber)
+        console.log(verifCode)
+        console.log(cardID)
         return {"message" : "User Not Verified"}
     }
     else {
