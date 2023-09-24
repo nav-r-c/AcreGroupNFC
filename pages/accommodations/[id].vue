@@ -2,7 +2,7 @@
     <NuxtLayout name = "main-pages">
         <div v-if="accFound" class = "font-[Roboto]">
             <!-- {{ (data.data.value?.data as AccDetails).description }} -->
-            <div class = "font-[Roboto] text-center py-5 pb-20 rounded-b-xl bg-[#0A5D00] text-[#1E2968]">
+            <div class = "font-[Roboto] text-center py-5 pb-20 rounded-b-xl bg-primary-green text-[#1E2968]">
                 <img src = "/logo-whitebg.png" class = "mx-auto" alt = "logo"/>
                 <h1 class = 'font-bold text-3xl text-white drop-shadow-lg my-2'>Accommodations</h1>
 
@@ -26,18 +26,18 @@
                     <p class = "mx-auto text-sm text-center w-[80%] my-5 " v-html="formattedDesc3"></p>
                 </div>
 
-                <div class = "mx-auto bg-[#0A5D00] text-center text-white p-5 w-[90%] rounded-lg">
+                <div class = "mx-auto bg-primary-green text-center text-white p-5 w-[90%] rounded-lg">
                     <a :href = "`tel:${(dataBrief.data.value?.data as Accs).phoneNumber}`"><div>Call Us at <span class = "font-bold">+91 {{ (dataBrief.data.value?.data as Accs).phoneNumber?.toString().slice(0, 5) }} {{ (dataBrief.data.value?.data as Accs).phoneNumber?.toString().slice(5) }}</span></div></a>
                 </div>
 
                 <!-- <h1 class = "text-center font-bold mt-5 mb-2">Download The App: </h1>
                 <div class = "flex justify-between w-[90%] gap-5 mx-auto">
-                    <div class = "mx-auto bg-[#0A5D00] text-center text-white p-5 w-[50%] rounded-lg">
+                    <div class = "mx-auto bg-primary-green text-center text-white p-5 w-[50%] rounded-lg">
                         <NuxtLink to="/">
                             <span></span>
                         </NuxtLink>
                     </div>
-                    <div class = "mx-auto bg-[#0A5D00] text-center text-white p-5 w-[50%] rounded-lg">
+                    <div class = "mx-auto bg-primary-green text-center text-white p-5 w-[50%] rounded-lg">
                         <NuxtLink to="/">
                             <span></span>
                         </NuxtLink>
@@ -49,7 +49,7 @@
 
         </div>
         <div v-else>
-            <div class = "font-[Roboto] text-center bg-[#0A5D00] text-white p-20 rounded-b-3xl">
+            <div class = "font-[Roboto] text-center bg-primary-green text-white p-20 rounded-b-3xl">
                 <img src = "/logo-whitebg.png" class = "mx-auto" alt = "logo"/>
                 <h1 class = "text-3xl font-bold my-5">Information On This Accommodation is Unavailable</h1>
                 <NuxtLink to="/accommodations" class = "underline">Go Back To List</NuxtLink>

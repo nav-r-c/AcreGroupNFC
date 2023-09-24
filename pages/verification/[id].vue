@@ -43,8 +43,7 @@
         const resp = await useFetch<FetchedResponse | null >(`/api/userDetails/verify?phoneNumber=${phoneNumber.value}&verifCode=${verifCode.value}&cardID=${cardID}`, {
             method : "post"
         })
-
-        console.log(`/api/userDetails/verify?phoneNumber=${phoneNumber.value}&verifCode=${verifCode.value}&cardID=${cardID}`);
+        // console.log(`/api/userDetails/verify?phoneNumber=${phoneNumber.value}&verifCode=${verifCode.value}&cardID=${cardID}`);
         // console.log(resp);
         // console.log(phoneNumber.value)
         // console.log(verifCode.value)
