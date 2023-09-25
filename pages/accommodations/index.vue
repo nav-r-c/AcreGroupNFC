@@ -3,8 +3,8 @@
         <NuxtLayout name = "main-pages">
             <div class = "mb-[280px]">
                 <div class = "bg-primary-green py-5 rounded-b-xl pb-[35%]">
-                    <img src = "/logo-whitebg.png" class = "mx-auto" alt = "logo"/>
-                    <h1 class = "text-white drop-shadow-lg font-bold text-center font-[Roboto] text-3xl mb-10">Accommodations</h1> 
+                    <img src = "/logo-alt.png" class = "mx-auto w-[15%]" alt = "logo"/>
+                    <h1 class = "text-white drop-shadow-lg font-bold text-center font-[Roboto] text-2xl my-2 mb-10">Accommodations</h1> 
                 </div>
 
                 <div class = "-my-[45%]">
