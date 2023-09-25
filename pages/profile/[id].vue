@@ -36,10 +36,10 @@
                                     <p class = "text-md">Phone Number:</p>
                                     <p>+91 {{ (userDetails.data.value?.data as UserDetails).Phone?.slice(0, 5) }} {{ (userDetails.data.value?.data as UserDetails).Phone?.slice(5) }}</p>
                                 </div>
-                                <div class = "flex justify-between items-center my-1">
+                                <!-- <div class = "flex justify-between items-center my-1">
                                     <p class = "text-md">E-Mail Address: </p>
                                     <p>{{ (userDetails.data.value?.data as UserDetails).Email }}</p>
-                                </div>
+                                </div> -->
                                 <div class = "flex justify-between items-center my-1">
                                     <p class = "text-md">Date Of Birth: </p>
                                     <p>{{ (userDetails.data.value?.data as UserDetails).DOB }}</p>
