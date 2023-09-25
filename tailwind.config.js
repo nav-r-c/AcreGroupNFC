@@ -12,7 +12,7 @@ module.exports = {
   theme: {
     colors : {
       'alt-green' : '#208D0F',
-      'primary-green' : '#0A5D00',
+      'primary-green' : '#004200',
       'circle-silver' : "#D3D3D3",
       'primary-gold' : '#C69320',
       'light-gold' : '#EEB60980' 
