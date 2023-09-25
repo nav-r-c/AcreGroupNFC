@@ -13,7 +13,7 @@
                         <img src ="/logo-alt.png" class = "mx-auto w-[15%]" alt = "acre group logo" />
 
                         <h1 class="font-bold text-white text-2xl drop-shadow-lg drop-shadow-white my-3">Personal Profile</h1>
-                        <div class = "bg-transparent circle-grad py-10 my-3">
+                        <div class = "bg-transparent circle-grad py-20 -my-12 my-3">
                             <img :src = "(userDetails.data.value?.data as UserDetails).DpUrl" class = "w-[40%] circle-mask mx-auto" alt = "member pfp"/>
                         </div>
                         <img src = "/PremiumIcon.png" class = "mx-auto my-5 w-[20%] absolute top-0 right-0 mt-[35%] mr-[28%] z-10">
