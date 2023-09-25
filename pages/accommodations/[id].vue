@@ -1,21 +1,15 @@
 <template>
     <NuxtLayout name = "main-pages">
         <div v-if="accFound" class = "font-[Roboto]">
-
-            <div v-if="pageUndefined">
-                <div>
-                    Login Timed Out - Rescan Card To Login Again
-                </div>
-            </div>
-
-            <div v-else>
+            <div>
                 <div class = "font-[Roboto] text-center py-5 pb-20 rounded-b-xl bg-primary-green text-[#1E2968]">
-                    <img src = "/logo-whitebg.png" class = "mx-auto" alt = "logo"/>
-                    <h1 class = 'font-bold text-xl text-white drop-shadow-lg my-2'>Accommodations</h1>
+                    <img src = "/logo-alt.png" class = "mx-auto w-[15%]" alt = "logo"/>
+                    <h1 class = 'font-bold text-2xl text-white drop-shadow-lg my-2'>Accommodations</h1>
 
                     <Carousel :images = "images"/>
 
                     <div class = "my-2">
+                        <h1 class = "text-white text-lg font-bold">{{ id.split('+').join(' ').trim() }}</h1>
                         <NuxtLink :to="(dataBrief.data.value?.data as Accs).mapLink"><p class = "text-white text-[0.75rem] w-[80%] mx-auto my-1 flex justify-center items-center"><span class="material-symbols-outlined text-white text-sm">location_on</span>{{ (data.data.value?.data as AccDetails).location }}</p></NuxtLink>
                         <!-- <p class = "text-white text-[0.75rem] w-[80%] mx-auto my-1 flex justify-center items-center"><span class="material-symbols-outlined text-white text-sm">location_on</span>{{ (data.data.value?.data as AccDetails).location }}</p></NuxtLink> -->
                     </div>
@@ -70,8 +64,6 @@
 <script setup lang="ts">
     const route = useRoute();
     const id = route.params.id.toString() as string
-
-    console.log(id);
 
     interface AccsResp {
         message? : string
@@ -138,10 +130,7 @@
         return lines.join('<br><br>');
     });
 
-    const pageUndefined = computed(() => {
-        console.log(id);
-        return id === "undefined"
-    })
+
 
 
 </script>
