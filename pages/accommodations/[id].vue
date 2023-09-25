@@ -1,57 +1,66 @@
 <template>
     <NuxtLayout name = "main-pages">
         <div v-if="accFound" class = "font-[Roboto]">
-            <!-- {{ (data.data.value?.data as AccDetails).description }} -->
-            <div class = "font-[Roboto] text-center py-5 pb-20 rounded-b-xl bg-primary-green text-[#1E2968]">
-                <img src = "/logo-whitebg.png" class = "mx-auto" alt = "logo"/>
-                <h1 class = 'font-bold text-3xl text-white drop-shadow-lg my-2'>Accommodations</h1>
 
-                <Carousel :images = "images"/>
-
-                <div class = "my-2">
-                    <h1 class = "text-white text-lg font-bold">{{ id.split('+').join(' ').trim() }}</h1>
-                    <NuxtLink :to="(dataBrief.data.value?.data as Accs).mapLink"><p class = "text-white text-[0.75rem] w-[80%] mx-auto my-1 flex justify-center items-center"><span class="material-symbols-outlined text-white text-sm">location_on</span>{{ (data.data.value?.data as AccDetails).location }}</p></NuxtLink>
-                    <!-- <p class = "text-white text-[0.75rem] w-[80%] mx-auto my-1 flex justify-center items-center"><span class="material-symbols-outlined text-white text-sm">location_on</span>{{ (data.data.value?.data as AccDetails).location }}</p></NuxtLink> -->
+            <div v-if="pageUndefined">
+                <div>
+                    Login Timed Out - Rescan Card To Login Again
                 </div>
             </div>
 
-            <div class = '-my-[15%]'>
-                <p class = "text-center mx-auto text-sm w-[90%] bg-white rounded-md p-5 border-2 border-[#fefefe] shadow-lg whitespace-break-spaces" v-html="formattedDesc"></p>
+            <div v-else>
+                <div class = "font-[Roboto] text-center py-5 pb-20 rounded-b-xl bg-primary-green text-[#1E2968]">
+                    <img src = "/logo-whitebg.png" class = "mx-auto" alt = "logo"/>
+                    <h1 class = 'font-bold text-xl text-white drop-shadow-lg my-2'>Accommodations</h1>
 
-                <div class = "my-10">
-                    <img :src="(data.data.value?.data?.imageUrl1)" class = "my-5 w-[90%] mx-auto rounded-lg whitespace-break-spaces" />
-                    <p class = "mx-auto text-sm text-center w-[80%] my-5" v-html="formattedDesc2"></p>
+                    <Carousel :images = "images"/>
 
-                    <img :src="(data.data.value?.data?.imageUrl2)" class = "my-5 w-[90%] mx-auto rounded-lg whitespace-break-spaces" />
-                    <p class = "mx-auto text-sm text-center w-[80%] my-5 " v-html="formattedDesc3"></p>
+                    <div class = "my-2">
+                        <NuxtLink :to="(dataBrief.data.value?.data as Accs).mapLink"><p class = "text-white text-[0.75rem] w-[80%] mx-auto my-1 flex justify-center items-center"><span class="material-symbols-outlined text-white text-sm">location_on</span>{{ (data.data.value?.data as AccDetails).location }}</p></NuxtLink>
+                        <!-- <p class = "text-white text-[0.75rem] w-[80%] mx-auto my-1 flex justify-center items-center"><span class="material-symbols-outlined text-white text-sm">location_on</span>{{ (data.data.value?.data as AccDetails).location }}</p></NuxtLink> -->
+                    </div>
                 </div>
 
-                <div class = "mx-auto bg-primary-green text-center text-white p-5 w-[90%] rounded-lg">
-                    <a :href = "`tel:${(dataBrief.data.value?.data as Accs).phoneNumber}`"><div>Call Us at <span class = "font-bold">+91 {{ (dataBrief.data.value?.data as Accs).phoneNumber?.toString().slice(0, 5) }} {{ (dataBrief.data.value?.data as Accs).phoneNumber?.toString().slice(5) }}</span></div></a>
+                <div class = '-my-[15%]'>
+                    <p class = "text-center mx-auto text-sm w-[90%] bg-white rounded-md p-5 border-2 border-[#fefefe] shadow-lg whitespace-break-spaces" v-html="formattedDesc"></p>
+
+                    <div class = "my-10">
+                        <img :src="(data.data.value?.data?.imageUrl1)" class = "my-5 w-[90%] mx-auto rounded-lg whitespace-break-spaces" />
+                        <p class = "mx-auto text-sm text-center w-[80%] my-5" v-html="formattedDesc2"></p>
+
+                        <img :src="(data.data.value?.data?.imageUrl2)" class = "my-5 w-[90%] mx-auto rounded-lg whitespace-break-spaces" />
+                        <p class = "mx-auto text-sm text-center w-[80%] my-5 " v-html="formattedDesc3"></p>
+                    </div>
+
+                    <div class = "mx-auto bg-primary-green text-center text-white p-5 w-[90%] rounded-lg">
+                        <a :href = "`tel:${(dataBrief.data.value?.data as Accs).phoneNumber}`"><div>Call Us at <span class = "font-bold">+91 {{ (dataBrief.data.value?.data as Accs).phoneNumber?.toString().slice(0, 5) }} {{ (dataBrief.data.value?.data as Accs).phoneNumber?.toString().slice(5) }}</span></div></a>
+                    </div>
+
+                    <!-- <h1 class = "text-center font-bold mt-5 mb-2">Download The App: </h1>
+                    <div class = "flex justify-between w-[90%] gap-5 mx-auto">
+                        <div class = "mx-auto bg-primary-green text-center text-white p-5 w-[50%] rounded-lg">
+                            <NuxtLink to="/">
+                                <span></span>
+                            </NuxtLink>
+                        </div>
+                        <div class = "mx-auto bg-primary-green text-center text-white p-5 w-[50%] rounded-lg">
+                            <NuxtLink to="/">
+                                <span></span>
+                            </NuxtLink>
+                        </div>
+
+                    </div> -->
+                
                 </div>
-
-                <!-- <h1 class = "text-center font-bold mt-5 mb-2">Download The App: </h1>
-                <div class = "flex justify-between w-[90%] gap-5 mx-auto">
-                    <div class = "mx-auto bg-primary-green text-center text-white p-5 w-[50%] rounded-lg">
-                        <NuxtLink to="/">
-                            <span></span>
-                        </NuxtLink>
-                    </div>
-                    <div class = "mx-auto bg-primary-green text-center text-white p-5 w-[50%] rounded-lg">
-                        <NuxtLink to="/">
-                            <span></span>
-                        </NuxtLink>
-                    </div>
-
-                </div> -->
+            </div>
             
-            </div>
 
         </div>
+
         <div v-else>
             <div class = "font-[Roboto] text-center bg-primary-green text-white p-20 rounded-b-3xl">
                 <img src = "/logo-whitebg.png" class = "mx-auto" alt = "logo"/>
-                <h1 class = "text-3xl font-bold my-5">Information On This Accommodation is Unavailable</h1>
+                <h1 class = "text-xl font-bold my-5">Information On This Accommodation is Unavailable</h1>
                 <NuxtLink to="/accommodations" class = "underline">Go Back To List</NuxtLink>
             </div>
         </div>
@@ -61,6 +70,8 @@
 <script setup lang="ts">
     const route = useRoute();
     const id = route.params.id.toString() as string
+
+    console.log(id);
 
     interface AccsResp {
         message? : string
@@ -126,6 +137,11 @@
         const lines = description.split('\\n').filter(Boolean);
         return lines.join('<br><br>');
     });
+
+    const pageUndefined = computed(() => {
+        console.log(id);
+        return id === "undefined"
+    })
 
 
 </script>
