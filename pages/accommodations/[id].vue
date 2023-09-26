@@ -3,7 +3,7 @@
         <div v-if="accFound" class = "font-[Roboto]">
             <div>
                 <div class = "font-[Roboto] text-center py-5 pb-20 rounded-b-xl bg-primary-green text-[#1E2968]">
-                    <img src = "/logo-alt.png" class = "mx-auto w-[15%]" alt = "logo"/>
+                    <img src = "/logo-alt.png" class = "mx-auto w-[15%]" alt = "logo" loading="lazy"/>
                     <h1 class = 'font-bold text-2xl text-white drop-shadow-lg my-2'>Accommodations</h1>
 
                     <Carousel :images = "images"/>
@@ -20,26 +20,26 @@
 
                     <div class = "my-10">
                         <img :src="(data.data.value?.data?.imageUrl1)" class = "my-5 w-[90%] mx-auto rounded-lg whitespace-break-spaces" />
-                        <p class = "mx-auto text-sm text-center w-[80%] my-5" v-html="formattedDesc2"></p>
+                        <p class = "mx-auto text-sm text-center w-[80%] my-5" v-html="formattedDesc2" loading="lazy"></p>
 
                         <img :src="(data.data.value?.data?.imageUrl2)" class = "my-5 w-[90%] mx-auto rounded-lg whitespace-break-spaces" />
-                        <p class = "mx-auto text-sm text-center w-[80%] my-5 " v-html="formattedDesc3"></p>
+                        <p class = "mx-auto text-sm text-center w-[80%] my-5 " v-html="formattedDesc3" loading = "lazy"></p>
                     </div>
 
                     <div class = "mx-auto bg-primary-green text-center text-white p-5 w-[90%] rounded-lg">
-                        <a :href = "`tel:${(dataBrief.data.value?.data as Accs).phoneNumber}`"><div>Call Us at <span class = "font-bold">+91 {{ (dataBrief.data.value?.data as Accs).phoneNumber?.toString().slice(0, 5) }} {{ (dataBrief.data.value?.data as Accs).phoneNumber?.toString().slice(5) }}</span></div></a>
+                        <a :href = "`tel:${(dataBrief.data.value?.data as Accs).phoneNumber}`"><div>Get Support: <span class = "font-bold">+91 {{ (dataBrief.data.value?.data as Accs).phoneNumber?.toString().slice(0, 5) }} {{ (dataBrief.data.value?.data as Accs).phoneNumber?.toString().slice(5) }}</span></div></a>
                     </div>
 
-                    <h1 class = "text-center font-bold mt-5 mb-2">Download The App: </h1>
+                    <h1 class = "text-center font-bold mt-5 mb-2">Book Your Stay: </h1>
                     <div class = "flex justify-between w-[90%] gap-5 mx-auto">
                         <div class = "mx-auto bg-primary-green text-center text-white p-5 w-[50%] rounded-lg">
-                            <NuxtLink to="/">
-                                <span></span>
+                            <NuxtLink to="/accommodations">
+                                <img src = "/GooglePlay.png" class = "mx-auto" loading="lazy"/>
                             </NuxtLink>
                         </div>
                         <div class = "mx-auto bg-primary-green text-center text-white p-5 w-[50%] rounded-lg">
-                            <NuxtLink to="/">
-                                <span></span>
+                            <NuxtLink to="/accommodations">
+                                <img src = "/AppStore.png" class = "mx-auto" loading="lazy" />
                             </NuxtLink>
                         </div>
 
@@ -53,7 +53,7 @@
 
         <div v-else>
             <div class = "font-[Roboto] text-center bg-primary-green text-white p-20 rounded-b-3xl">
-                <img src = "/logo-whitebg.png" class = "mx-auto" alt = "logo"/>
+                <img src = "/logo-whitebg.png" class = "mx-auto" alt = "logo" loading="lazy"/>
                 <h1 class = "text-xl font-bold my-5">Information On This Accommodation is Unavailable</h1>
                 <NuxtLink to="/accommodations" class = "underline">Go Back To List</NuxtLink>
             </div>
