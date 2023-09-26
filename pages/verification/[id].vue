@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src = "/logo-whitebg.png" class = "absolute z-10 mx-auto left-0 right-0 my-5" alt = "acre-group-logo"/>
+        <img src = "/logo-whitebg.png" class = "absolute z-10 mx-auto left-0 right-0 my-5" alt = "acre-group-logo" loading="lazy"/>
     </div>
     <div class = "mx-auto left-0 right-0 text-center font-[Roboto] absolute top-[25%] z-10">
         <h1 class = "font-bold text-4xl my-5 text-white drop-shadow-xl">Profile Verification</h1>
@@ -17,7 +17,7 @@
         </form>
     </div>
 
-    <img src = "/kodai-phone.png" class = "w-screen h-screen" />
+    <img src = "/kodai-phone.png" class = "w-screen h-screen" loading="lazy" />
 
     <!-- <div class = "text-white underline text-center absolute mx-auto left-0 right-0 text-xl bottom-0 my-5">
         <NuxtLink to="/">Terms And Services</NuxtLink>
