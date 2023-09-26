@@ -20,8 +20,8 @@
                         <div>
                             <p class = "text-xl md:text-5xl my-2"><span class = 'font-bold'>{{ (userDetails.data.value?.data as UserDetails)?.Name?.split(" ")[0] }}</span> <span>{{ (userDetails.data.value?.data as UserDetails)?.Name?.split(" ").slice(1).join(" ") }}</span></p>
                             <div>
-                                <p class = "text-md">Membership Status: <span class = "font-bold">{{ (userDetails.data.value?.data as UserDetails)?.MembershipStatus }}</span></p>
                                 <p class = "text-md">Valid from: <span class = "font-bold">{{ (userDetails.data.value?.data as UserDetails)?.validityStartDate }}</span></p>
+                                <p class = "text-md">Membership Status: <span class = "font-bold">{{ (userDetails.data.value?.data as UserDetails)?.MembershipStatus }}</span></p>
                             </div>
                         </div>
                         
@@ -33,12 +33,12 @@
                         <DropCard cardTitle = "Personal Information">
                             <div class = "py-2">
                                 <div class = "flex justify-between items-center my-1">
-                                    <p class = "text-md">Phone Number:</p>
-                                    <p>+91 {{ (userDetails.data.value?.data as UserDetails).Phone?.slice(0, 5) }} {{ (userDetails.data.value?.data as UserDetails).Phone?.slice(5) }}</p>
-                                </div>
-                                <div class = "flex justify-between items-center my-1">
                                     <p class = "text-md">E-Mail ID: </p>
                                     <p>{{ (userDetails.data.value?.data as UserDetails).Email }}</p>
+                                </div>
+                                <div class = "flex justify-between items-center my-1">
+                                    <p class = "text-md">Phone No:</p>
+                                    <p>+91 {{ (userDetails.data.value?.data as UserDetails).Phone?.slice(0, 5) }} {{ (userDetails.data.value?.data as UserDetails).Phone?.slice(5) }}</p>
                                 </div>
                                 <div class = "flex justify-between items-center my-1">
                                     <p class = "text-md">Date Of Birth: </p>
