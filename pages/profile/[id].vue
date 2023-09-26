@@ -13,10 +13,10 @@
                         <img src ="/logo-alt.png" class = "mx-auto w-[15%]" alt = "acre group logo" />
 
                         <h1 class="font-bold text-white text-2xl drop-shadow-lg drop-shadow-white my-3">Personal Profile</h1>
-                        <div class = "bg-transparent circle-grad py-20 -my-12 my-3">
+                        <div class = "bg-transparent circle-grad py-20 -my-[12%]">
                             <img :src = "(userDetails.data.value?.data as UserDetails).DpUrl" class = "w-[40%] circle-mask mx-auto" alt = "member pfp"/>
                         </div>
-                        <img src = "/PremiumIcon.png" class = "mx-auto my-5 w-[20%] absolute top-0 right-0 mt-[35%] mr-[28%] z-10">
+                        <!-- <img src = "/PremiumIcon.png" class = "mx-auto my-5 w-[20%] absolute top-0 right-0 mt-[35%] mr-[28%] z-10"> -->
                         <div>
                             <p class = "text-xl md:text-5xl my-2"><span class = 'font-bold'>{{ (userDetails.data.value?.data as UserDetails)?.Name?.split(" ")[0] }}</span> <span>{{ (userDetails.data.value?.data as UserDetails)?.Name?.split(" ").slice(1).join(" ") }}</span></p>
                             <div>
@@ -36,10 +36,10 @@
                                     <p class = "text-md">Phone Number:</p>
                                     <p>+91 {{ (userDetails.data.value?.data as UserDetails).Phone?.slice(0, 5) }} {{ (userDetails.data.value?.data as UserDetails).Phone?.slice(5) }}</p>
                                 </div>
-                                <!-- <div class = "flex justify-between items-center my-1">
-                                    <p class = "text-md">E-Mail Address: </p>
+                                <div class = "flex justify-between items-center my-1">
+                                    <p class = "text-md">E-Mail ID: </p>
                                     <p>{{ (userDetails.data.value?.data as UserDetails).Email }}</p>
-                                </div> -->
+                                </div>
                                 <div class = "flex justify-between items-center my-1">
                                     <p class = "text-md">Date Of Birth: </p>
                                     <p>{{ (userDetails.data.value?.data as UserDetails).DOB }}</p>
@@ -129,7 +129,7 @@
 
     .circle-grad {
         background-image: url("/bg.png");
-        background-size: 65%;
+        background-size: 90%;
         background-repeat: no-repeat;
         background-position: center center;
     }
